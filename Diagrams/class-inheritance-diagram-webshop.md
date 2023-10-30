@@ -20,6 +20,10 @@ classDiagram
     ProductServiceDoc  <|-- ProductDoc
     ProductServiceDoc  <|-- ShoppingcartDoc
 
+    WebshopDoc<|--  ValidateDoc
+    ProductDoc  <|-- ValidateDoc
+    ShoppingcartDoc <|-- ValidateDoc
+
 
 
     class HtmlDoc{
@@ -59,19 +63,38 @@ classDiagram
     class FormDoc{
         #showHeader()
         #showContent()
+        #getPageData()
+        #validateForm()
     }
     class ContactDoc{
         #showHeader()
         #showContent()
+        #getPageData()
+        #validateForm()
+        #validateDoc()
     }
+
     class LoginDoc{
         #showHeader()
         #showContent()
+        #getPageData()
+        #validateForm()
+        #validateDoc()
     }
     class RegisterDoc{
         #showHeader()
         #showContent()
+        #getPageData()
+        #validateForm()
+        #validateDoc()
     }
+
+    class ValidateDoc{
+        #collectRequiredField()
+        #collectAndValidateName()
+        #collectAndValidateEmail()
+    }
+
 
 
 
@@ -108,4 +131,4 @@ classDiagram
     }
 
 
-```
+
