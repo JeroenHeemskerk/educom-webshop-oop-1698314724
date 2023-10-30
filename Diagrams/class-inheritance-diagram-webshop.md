@@ -10,12 +10,15 @@ classDiagram
     BasicDoc <|-- HomeDoc
     BasicDoc <|-- AboutDoc
     BasicDoc <|-- FormDoc
-    BasicDoc <|-- ProductDoc
+    BasicDoc <|-- ProductServiceDoc
 
     FormDoc <|-- ContactDoc
     FormDoc <|-- LoginDoc
     FormDoc <|-- RegisterDoc
-
+        
+    ProductServiceDoc  <|-- WebshopDoc
+    ProductServiceDoc  <|-- ProductDoc
+    ProductServiceDoc  <|-- ShoppingcartDoc
 
 
 
@@ -46,10 +49,13 @@ classDiagram
         #showHeader()
         #showContent()
     }
+
     class AboutDoc{
         #showHeader()
         #showContent()
     }
+
+
     class FormDoc{
         #showHeader()
         #showContent()
@@ -66,5 +72,25 @@ classDiagram
         #showHeader()
         #showContent()
     }
+
+
+
+    class ProductServiceDoc{
+        #showHeader()
+        #showContent()
+    }
+    class WebshopDoc{
+        #showHeader()
+        #showContent()
+    }
+    class ShoppingcartDoc{
+        #showHeader()
+        #showContent()
+    }
+    class ProductDoc{
+        #showHeader()
+        #showContent()
+    }
+
 
 ```
