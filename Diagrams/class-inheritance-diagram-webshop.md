@@ -14,6 +14,10 @@ classDiagram
 
     FormDoc <|-- ContactDoc
     FormDoc <|-- LoginDoc
+    FormDoc <|-- RegisterDoc
+
+
+
 
     class HtmlDoc{
        +show()
