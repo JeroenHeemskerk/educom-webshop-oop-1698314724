@@ -85,9 +85,9 @@ classDiagram
     }
 
     class ValidateDoc{
-        #collectRequiredField()
-        #collectAndValidateName()
-        #collectAndValidateEmail()
+        +collectRequiredField()
+        +collectAndValidateName()
+        +collectAndValidateEmail()
     }
 
 
