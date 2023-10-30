@@ -76,20 +76,35 @@ classDiagram
 
 
     class ProductServiceDoc{
+        #initializePageData()
+        #handleActions()
+        #getPageData()
         #showHeader()
         #showContent()
     }
     class WebshopDoc{
-        #showHeader()
-        #showContent()
+        #initializePageData()
+        #handleActions()
+        #getPageData()
+        +showHeader()
+        +showContent()
+        -showProductCard()
     }
     class ShoppingcartDoc{
-        #showHeader()
-        #showContent()
+        #initializePageData()
+        #handleActions()
+        #getPageData()
+        +showHeader()
+        +showContent()
+        -showProductLine()
     }
     class ProductDoc{
-        #showHeader()
-        #showContent()
+        #initializePageData()
+        #handleActions()
+        #getPageData()
+        +showHeader()
+        +showContent()
+        -showProduct()
     }
 
 
