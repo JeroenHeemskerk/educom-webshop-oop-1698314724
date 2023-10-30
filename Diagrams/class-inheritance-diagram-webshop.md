@@ -20,11 +20,6 @@ classDiagram
     ProductServiceDoc  <|-- ProductDoc
     ProductServiceDoc  <|-- ShoppingcartDoc
 
-    WebshopDoc<|--  ValidateDoc
-    ProductDoc  <|-- ValidateDoc
-    ShoppingcartDoc <|-- ValidateDoc
-
-
 
     class HtmlDoc{
        +show()
