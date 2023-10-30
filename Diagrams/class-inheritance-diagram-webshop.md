@@ -10,6 +10,7 @@ classDiagram
     BasicDoc <|-- HomeDoc
     BasicDoc <|-- AboutDoc
     BasicDoc <|-- FormDoc
+    BasicDoc <|-- ProductDoc
 
     FormDoc <|-- ContactDoc
     FormDoc <|-- LoginDoc
@@ -46,13 +47,18 @@ classDiagram
         #showContent()
     }
     class FormDoc{
-        <<abstract>>
+        #showHeader()
+        #showContent()
     }
     class ContactDoc{
         #showHeader()
         #showContent()
     }
     class LoginDoc{
+        #showHeader()
+        #showContent()
+    }
+    class RegisterDoc{
         #showHeader()
         #showContent()
     }
