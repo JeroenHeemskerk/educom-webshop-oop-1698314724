@@ -61,7 +61,9 @@ classDiagram
         #getPageData()
         #validateForm()
     }
+
     class ContactDoc{
+        #data 
         #showHeader()
         #showContent()
         #getPageData()
@@ -70,6 +72,7 @@ classDiagram
     }
 
     class LoginDoc{
+        #data 
         #showHeader()
         #showContent()
         #getPageData()
@@ -77,6 +80,7 @@ classDiagram
         #validateDoc()
     }
     class RegisterDoc{
+        #data 
         #showHeader()
         #showContent()
         #getPageData()
@@ -101,6 +105,7 @@ classDiagram
         #showContent()
     }
     class WebshopDoc{
+        #data 
         #initializePageData()
         #handleActions()
         #getPageData()
@@ -109,6 +114,7 @@ classDiagram
         -showProductCard()
     }
     class ShoppingcartDoc{
+        #data 
         #initializePageData()
         #handleActions()
         #getPageData()
@@ -117,6 +123,7 @@ classDiagram
         -showProductLine()
     }
     class ProductDoc{
+        #data 
         #initializePageData()
         #handleActions()
         #getPageData()
