@@ -39,7 +39,7 @@ classDiagram
         -showTitle()
         -showCssLinks()
         #showBodyContent()
-        #showHeader()
+        -showHeader()
         -showMenu()
         #showContent()
         -showFooter()
@@ -63,50 +63,45 @@ classDiagram
 
     class ContactDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
     class LoginDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
     class RegisterDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
 
     class ProductServiceDoc{
-        #showHeader()
-        #showContent()
         #showActionButton()
     }
 
     class WebshopDoc{
         #data      
-        #showHeader()
+        #showHeaderContent()
         #showContent()
         -showProductCard()
-        -showActionButton()
     }
 
     class ShoppingcartDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
         -showProductLine()
-        -showActionButton()
     }
 
     class ProductDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
         -showProduct()
-        -showActionButton()
     }
 
 
