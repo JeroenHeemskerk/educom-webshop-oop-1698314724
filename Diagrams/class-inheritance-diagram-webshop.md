@@ -45,12 +45,12 @@ classDiagram
         -showFooter()
     }
     class HomeDoc{
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
     class AboutDoc{
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
