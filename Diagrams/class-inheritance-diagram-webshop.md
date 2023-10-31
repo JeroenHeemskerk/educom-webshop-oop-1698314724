@@ -86,26 +86,26 @@ classDiagram
 
     class WebshopDoc{
         #data      
-        +showHeader()
-        +showContent()
+        #showHeader()
+        #showContent()
         -showProductCard()
-        #showActionButton()
+        -showActionButton()
     }
 
     class ShoppingcartDoc{
         #data 
-        +showHeader()
-        +showContent()
+        #showHeader()
+        #showContent()
         -showProductLine()
-        #showActionButton()
+        -showActionButton()
     }
 
     class ProductDoc{
         #data 
-        +showHeader()
-        +showContent()
+        #showHeader()
+        #showContent()
         -showProduct()
-        #showActionButton()
+        -showActionButton()
     }
 
 
