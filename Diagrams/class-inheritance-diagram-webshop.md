@@ -65,23 +65,17 @@ classDiagram
         #data 
         #showHeader()
         #showContent()
-        #getPageData()
-        #validateForm()
     }
 
     class LoginDoc{
         #data 
         #showHeader()
         #showContent()
-        #getPageData()
-        #validateForm()
     }
     class RegisterDoc{
         #data 
         #showHeader()
         #showContent()
-        #getPageData()
-        #validateForm()
     }
 
 
@@ -95,31 +89,27 @@ classDiagram
         #showContent()
     }
     class WebshopDoc{
-        #data 
-        #initializePageData()
-        #handleActions()
-        #getPageData()
+        #data      
         +showHeader()
         +showContent()
         -showProductCard()
+        #showActionButton()
     }
+
     class ShoppingcartDoc{
         #data 
-        #initializePageData()
-        #handleActions()
-        #getPageData()
         +showHeader()
         +showContent()
         -showProductLine()
+        #showActionButton()
     }
+
     class ProductDoc{
         #data 
-        #initializePageData()
-        #handleActions()
-        #getPageData()
         +showHeader()
         +showContent()
         -showProduct()
+        #showActionButton()
     }
 
 
