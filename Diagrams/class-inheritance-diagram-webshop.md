@@ -82,7 +82,6 @@ classDiagram
     class ProductServiceDoc{
         #showHeader()
         #showContent()
-        ?
     }
 
     class WebshopDoc{
