@@ -56,10 +56,9 @@ classDiagram
 
 
     class FormDoc{
-        #showHeader()
-        #showContent()
-        #getPageData()
-        #validateForm()
+        #showFormStart()
+        #showFormField()
+        #showFormEnd()
     }
 
     class ContactDoc{
@@ -68,7 +67,6 @@ classDiagram
         #showContent()
         #getPageData()
         #validateForm()
-        #validateDoc()
     }
 
     class LoginDoc{
@@ -77,7 +75,6 @@ classDiagram
         #showContent()
         #getPageData()
         #validateForm()
-        #validateDoc()
     }
     class RegisterDoc{
         #data 
@@ -85,13 +82,6 @@ classDiagram
         #showContent()
         #getPageData()
         #validateForm()
-        #validateDoc()
-    }
-
-    class ValidateDoc{
-        +collectRequiredField()
-        +collectAndValidateName()
-        +collectAndValidateEmail()
     }
 
 
