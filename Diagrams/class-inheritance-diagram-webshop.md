@@ -79,15 +79,12 @@ classDiagram
     }
 
 
-
-
     class ProductServiceDoc{
-        #initializePageData()
-        #handleActions()
-        #getPageData()
         #showHeader()
         #showContent()
+        ?
     }
+
     class WebshopDoc{
         #data      
         +showHeader()
