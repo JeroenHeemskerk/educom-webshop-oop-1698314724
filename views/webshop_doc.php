@@ -1,16 +1,24 @@
 <?php
 
-require_once("productservice_doc.php");
+require_once("product_actions_doc.php");
 
-class WebshopDoc extends ProductService
+class WebshopDoc extends ProductActionsDoc
 {
-    protected function showHeaderContent()
+
+    public function __construct($myData)
     {
+        $this->data = $myData;
     }
 
-    protected function showContent($pageData)
+
+    protected function showHeaderContent()
     {
-        $productsArray = $pageData['products'];
+        echo '<h1 class="headers">Webshoppage</h1>';
+    }
+
+    protected function showContent()
+    {
+        $productsArray = $this->data['products'];
 
         foreach ($productsArray as $product) {
             $this->showProductCard($product);
@@ -20,7 +28,6 @@ class WebshopDoc extends ProductService
     private function showProductCard($product)
     {
         require_once('session-manager.php');
-        require_once('form-fields.php');
         $userIsLoggedIn = isUserLoggedIn();
 
         echo

@@ -3,20 +3,26 @@
 require_once('forms_doc.php');
 class RegisterDoc extends FormsDoc
 {
+    public $data;
+
+    public function __construct($myData)
+    {
+        $this->data = $myData;
+    }
+
 
     protected function showHeaderContent()
     {
         echo '<h1 class="headers">Registerpage</h1>';
     }
 
-    protected function showContent($formData)
+    protected function showContent()
     {
-        require_once('form-fields.php');
-        showFormStart();
-        showFormField('name', 'Name:', 'text', $formData);
-        showFormField('email', 'Email:', 'email', $formData);
-        showFormField('password', 'Password:', 'password', $formData);
-        showFormField('repeatedPassword', 'Repeat password:', 'password', $formData);
-        showFormEnd('register', 'Submit');
+        $this->showFormStart();
+        $this->showFormField('name', 'Name:', 'text',  $this->data);
+        $this->showFormField('email', 'Email:', 'email', $this->data);
+        $this->showFormField('password', 'Password:', 'password', $this->data);
+        $this->showFormField('repeatedPassword', 'Repeat password:', 'password', $this->data);
+        $this->showFormEnd('register', 'Submit');
     }
 }

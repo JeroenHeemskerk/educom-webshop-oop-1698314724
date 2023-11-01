@@ -3,6 +3,14 @@
 require_once('forms_doc.php');
 class ContactDoc extends FormsDoc
 {
+
+    public $data;
+
+    public function __construct($myData)
+    {
+        $this->data = $myData;
+    }
+
     protected function showHeaderContent()
     {
         echo '<h1 class="headers">Contactpage</h1>';
@@ -10,30 +18,29 @@ class ContactDoc extends FormsDoc
 
     protected function showContent()
     {
-        if (!$pageData['valid']) {
-            $this->showContactForm($pageData);
+        if (!$this->data['valid']) {
+            $this->showContactForm($this->data);
         } else {
-            $this->showContactThanks($pageData);
+            $this->showContactThanks($this->data);
         }
     }
 
     private function showContactForm($formData)
     {
-        require_once('form-fields.php');
-        showFormStart();
-        showFormField('salutation', NULL, 'select', $formData, SALUTATIONS);
-        showFormField('name', 'Name:', 'text', $formData);
-        showFormField('email', 'Email:', 'email', $formData);
-        showFormField('phonenumber', 'Phonenumber:', 'text', $formData);
-        showFormField('comm_preference', 'Communication preference:', 'radio', $formData, COMM_PREFS);
-        showFormField('message', 'Message:', 'textarea', $formData, ['rows' => 5, 'cols' => 40]);
-        showFormEnd('contact', 'submit');
+        $this->showFormStart();
+        $this->showFormField('salutation', NULL, 'select', $formData, self::SALUTATIONS);
+        $this->showFormField('name', 'Name:', 'text', $formData);
+        $this->showFormField('email', 'Email:', 'email', $formData);
+        $this->showFormField('phonenumber', 'Phonenumber:', 'text', $formData);
+        $this->showFormField('comm_preference', 'Communication preference:', 'radio', $formData, self::COMM_PREFS);
+        $this->showFormField('message', 'Message:', 'textarea', $formData, ['rows' => 5, 'cols' => 40]);
+        $this->showFormEnd('contact', 'submit');
     }
 
     private function showContactThanks($contactData)
     {
         echo ' <p>Bedankt voor uw reactie:</p>
-         <div>Name:' . SALUTATIONS[$contactData['salutation']] . " " . $contactData['name'] . '</div>
+         <div>Name:' . self::SALUTATIONS[$contactData['salutation']] . " " . $contactData['name'] . '</div>
          <div>Email:' . $contactData['email'] . '</div>
          <div>Phonenumber:' . $contactData['phonenumber'] . '</div>
          <div>Communication preference:' . COMM_PREFS[$contactData['comm_preference']] . '</div>

@@ -8,6 +8,7 @@ class BasicDoc extends HtmlDoc
 
     public function __construct($myData)
     {
+        //model
         $this->data = $myData;
     }
 
@@ -22,6 +23,7 @@ class BasicDoc extends HtmlDoc
         // echo van het element title
         echo '<title>Laura\'s website</title>';
     }
+
     private function showCssLinks()
     {
         echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -33,7 +35,9 @@ class BasicDoc extends HtmlDoc
     {
         $this->showHeader();
         $this->showMenu();
-        $this->showContent($data);
+        $this->showGenericError();
+        $this->showGenericMessage();
+        $this->showContent();
         $this->showFooter();
     }
 
@@ -67,19 +71,32 @@ class BasicDoc extends HtmlDoc
         echo '<li><a href="index.php?page=' . $linkName . '">' . $buttonText . '</a></li>';
     }
 
-
-    protected function showContent($data)
+    protected function showContent()
     {
         //deze functie ga ik 'overriden' 
         //default neerzetten
-        echo 'showcontent is basicdoc';
+        //als de pagina niet wordt gevonden dan laat hij dit zien. Anders override hij 
+        echo 'Page not found';
     }
-
 
     private function showFooter()
     {
         echo '<footer class="footers">
         <p>&copy; 2023 Laura Bokkers</p>
         </footer>';
+    }
+
+    private function showGenericError()
+    {
+        if (isset($this->data["genericErr"])) {
+            echo "</br><span class='error'>" . $this->data["genericErr"] . "</span></br></br>";
+        }
+    }
+
+    private function showGenericMessage()
+    {
+        if (isset($this->data["genericMessage"])) {
+            echo "</br><span >" . $this->data["genericMessage"] . "</span></br></br>";
+        }
     }
 }

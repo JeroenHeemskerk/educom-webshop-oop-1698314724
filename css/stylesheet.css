@@ -112,3 +112,7 @@ a:link {
 .cart-quantity-wrapper>form>button {
     margin-bottom: 0px;
 }
+
+.radio {
+    margin-left: 10px;
+}

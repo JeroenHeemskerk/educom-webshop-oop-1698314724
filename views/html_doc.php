@@ -15,8 +15,8 @@ class HtmlDoc
     }
     protected function showHeadContent()
     {
-        //deze functie overriden?
-        // default neerzetten
+        //deze functie overriden
+        echo "showheadcontent Htmldoc ";
     }
     private function showHeadEnd()
     {
@@ -28,9 +28,8 @@ class HtmlDoc
     }
     protected function showBodyContent()
     {
-        //deze functie overriden?
-        //default neerzetten
-        echo 'hallo';
+        //deze functie overriden
+        echo 'showbodycontent Htmldoc';
     }
     private function showBodyEnd()
     {

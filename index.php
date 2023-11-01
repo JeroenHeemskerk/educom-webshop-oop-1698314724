@@ -15,6 +15,59 @@ $page = getRequestedPage();
 $pageData = processRequest($page);
 showResponsePage($pageData);
 
+
+function showResponsePage($pageData)
+{
+    $page = $pageData['page'];
+
+    switch ($page) {
+        case 'home':
+            require_once('views/home_doc.php');
+            $view = new HomeDoc($pageData);
+            $view->show();
+            break;
+        case 'about':
+            require_once('views/about_doc.php');
+            $view = new AboutDoc($pageData);
+            $view->show();
+            break;
+        case 'contact':
+            require_once('views/contact_doc.php');
+            $view = new ContactDoc($pageData);
+            $view->show();
+            break;
+        case 'register':
+            require_once('views/register_doc.php');
+            $view = new RegisterDoc($pageData);
+            $view->show();
+            break;
+        case 'login':
+            require_once('views/login_doc.php');
+            $view = new LoginDoc($pageData);
+            $view->show();
+            break;
+        case 'webshop':
+            require_once('views/webshop_doc.php');
+            $view = new WebshopDoc($pageData);
+            $view->show();
+            break;
+        case 'product':
+            require_once('views/product_doc.php');
+            $view = new ProductDoc($pageData);
+            $view->show();
+            break;
+        case 'shoppingcart':
+            require_once('views/shoppingcart_doc.php');
+            $view = new ShoppingcartDoc($pageData);
+            $view->show();
+            break;
+        default:
+            require_once('views/basic_doc.php');
+            $view = new BasicDoc($pageData);
+            $view->show();
+    }
+};
+
 // ===================================
 // FUNCTIONS
 // ===================================
@@ -31,13 +84,7 @@ function getRequestedPage()
     return $requestedPage;
 }
 
-function showResponsePage($pageData)
-{
-    beginDocument();
-    showHeadSection();
-    showBodySection($pageData);
-    endDocument();
-};
+
 
 
 //input is de route
@@ -158,128 +205,70 @@ function getArrayVar($array, $key, $default = '')
 // ===================================================
 
 
-function beginDocument()
-{
-    echo "<!doctype html>
-    <html class='entirepage'>";
-}
-
-function showHeadSection()
-{
-    echo '<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="CSS/stylesheet.css">
-    </head>';
-}
-
-function showBodySection($pageData)
-{
-    echo '    <body>' . PHP_EOL;
-    showHeader($pageData['page']);
-    showMenu($pageData);
-    showGenericError($pageData);
-    showGenericMessage($pageData);
-    showContent($pageData);
-    showFooter();
-    echo '    </body>' . PHP_EOL;
-}
-
-function endDocument()
-{
-    echo  '</html>';
-}
-
-//============================================== 
-
-function showHeader($pageTitle)
-{
-    echo '<h1 class="headers">' . $pageTitle . ' page</h1>';
-}
-
-function showMenu($data)
-{
-    echo "<nav>";
-    echo "<ul class='menu'>";
-    foreach ($data['menu'] as $key => $page) {
-        showMenuItem($key, $page);
-    }
-    echo '</ul>' . PHP_EOL . '</nav>' . PHP_EOL;
-}
-
-
-function showMenuItem($linkName, $buttonText)
-{
-    echo '<li><a href="index.php?page=' . $linkName . '">' . $buttonText . '</a></li>';
-}
-
-function showGenericError($pageData)
-{
-    echo "</br><span class='error'>" . getArrayVar($pageData, "genericErr") . "</span></br></br>";
-}
-
-function showGenericMessage($pageData)
-{
-    echo "</br><span >" . getArrayVar($pageData, "genericMessage") . "</span></br></br>";
-}
-
-function showContent($pageData)
-{
-    $page = $pageData['page'];
-
-    switch ($page) {
-        case 'home':
-            require_once('home.php');
-            showHomeContent();
-            break;
-        case 'about':
-            require_once('about.php');
-            showAboutContent();
-            break;
-        case 'contact':
-            require_once('contact.php');
-            showContactContent($pageData);
-            break;
-        case 'register':
-            require_once('register.php');
-            showRegisterForm($pageData);
-            break;
-        case 'login':
-            require_once('login.php');
-            showLoginForm($pageData);
-            break;
-        case 'webshop':
-            require_once('webshop.php');
-            showWebshopContent($pageData);
-            break;
-        case 'product':
-            require_once('product.php');
-            showProductContent($pageData);
-            break;
-        case 'shoppingcart':
-            require_once('shoppingcart.php');
-            showShoppingCart($pageData);
-            break;
-        default:
-            showPageNotFound();
-    }
-}
-
-function showFooter()
-{
-    echo '<footer class="footers">
-    <p>&copy; 2023 Laura Bokkers</p>
-    </footer>';
-}
+// function showBodySection($pageData)
+// {
+//     echo '    <body>' . PHP_EOL;
+//     showHeader($pageData['page']);
+//     showMenu($pageData);
+//     showGenericError($pageData);
+//     showGenericMessage($pageData);
+//     showContent($pageData);
+//     showFooter();
+//     echo '    </body>' . PHP_EOL;
+// }
 
 
 //============================================== 
 
 
-function showPageNotFound()
-{
-    echo 'Page not found';
-}
 
+// function showContent($pageData)
+// {
+//     $page = $pageData['page'];
+
+//     switch ($page) {
+//         case 'home':
+//             require_once('home.php');
+//             showHomeContent();
+//             break;
+//         case 'about':
+//             require_once('about.php');
+//             showAboutContent();
+//             break;
+//         case 'contact':
+//             require_once('contact.php');
+//             showContactContent($pageData);
+//             break;
+//         case 'register':
+//             require_once('register.php');
+//             showRegisterForm($pageData);
+//             break;
+//         case 'login':
+//             require_once('login.php');
+//             showLoginForm($pageData);
+//             break;
+//         case 'webshop':
+//             require_once('webshop.php');
+//             showWebshopContent($pageData);
+//             break;
+//         case 'product':
+//             require_once('product.php');
+//             showProductContent($pageData);
+//             break;
+//         case 'shoppingcart':
+//             require_once('shoppingcart.php');
+//             showShoppingCart($pageData);
+//             break;
+//         default:
+//             //showPageNotFound();
+//     }
+// }
+
+
+
+//============================================== 
+
+//deze functie zit niet in mijn UI
 function logError($message)
 {
     echo "Logging to logfile: $message";

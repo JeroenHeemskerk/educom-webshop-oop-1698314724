@@ -1,18 +1,23 @@
 <?php
 
-require_once("productservice_doc.php");
+require_once("product_actions_doc.php");
 
-class ShoppingcartDoc extends ProductServiceDoc
+class ShoppingcartDoc extends ProductActionsDoc
 {
-    protected function showHeaderContent()
+    public function __construct($myData)
     {
-        //?
+        $this->data = $myData;
     }
 
-    protected function showContent($pageData)
+    protected function showHeaderContent()
     {
-        $cart = $pageData['cart'];
-        $total = $pageData['total'];
+        echo '<h1 class="headers">Shoppingcart page</h1>';
+    }
+
+    protected function showContent()
+    {
+        $cart = $this->data['cart'];
+        $total = $this->data['total'];
 
         //ik weet vantevoren niet hoeveel producten er in de cart zitten.
         // Dus dan moet ik een loop schrijven
@@ -22,14 +27,13 @@ class ShoppingcartDoc extends ProductServiceDoc
         }
         echo
         "<span>Total amount: &euro;" . number_format(($total / 100), 2, ",") . "</span></br></br>";
-        require_once('form-fields.php');
+
         $this->showActionButton('shoppingcart', "Complete order", 'completeOrder');
         //'completeOrder' kan ik dan uit de post body halen. 
     }
 
     private function showProductline($productLine)
     {
-        require_once("form-fields.php");
         echo
         "<div class='card text-center card-outer-container' style='width: 50rem'>
                 <a href='index.php?page=product&id=" . $productLine['id'] . "'>

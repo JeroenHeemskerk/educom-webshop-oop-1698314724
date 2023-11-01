@@ -1,18 +1,20 @@
 <?php
 
-class ProductServiceDoc extends BasicDoc
+require_once('forms_doc.php');
+class ProductActionsDoc extends FormsDoc
 {
+
     protected function showActionButton($page, $submitButtonText, $actionType, $productId = null)
     {
         // $page = 'product'
         // $submitButtonText = 'add to cart'
         // value = 'addToCart' 'removeFromCart'
 
-        showFormStart();
+        $this->showFormStart();
 
         echo "<input hidden name='id' value='$productId'>
             <input hidden name='action' value='$actionType'>";
 
-        showFormEnd($page, $submitButtonText);
+        $this->showFormEnd($page, $submitButtonText);
     }
 }

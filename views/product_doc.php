@@ -1,19 +1,24 @@
 <?php
 
-require_once('productservice_doc.php');
+require_once('product_actions_doc.php');
 
-class ProductDoc extends ProductServiceDoc
+class ProductDoc extends ProductActionsDoc
 {
+
+    public function __construct($myData)
+    {
+        $this->data = $myData;
+    }
 
     protected function showHeaderContent()
     {
+        echo '<h1 class="headers">Product page</h1>';
     }
 
-    protected function showContent($pageData)
+    protected function showContent()
     {
-        require_once('form-fields.php');
-        $product = $pageData['product'];
-        $userIsLoggedIn = $pageData['userLoggedIn'];
+        $product = $this->data['product'];
+        $userIsLoggedIn = $this->data['userLoggedIn'];
         $this->showProduct($product, $userIsLoggedIn);
     }
 

@@ -5,6 +5,9 @@ require_once("basic_doc.php");
 class FormsDoc extends BasicDoc
 {
 
+    public const SALUTATIONS = array("mr." => "Dhr.", "mrs." => "Mvr.");
+    public const COMM_PREFS = array("email" => "Email", "phone" => "Phone");
+
     protected function showFormStart()
     {
         echo "<form method='POST' action='index.php'>";
@@ -36,7 +39,7 @@ class FormsDoc extends BasicDoc
             case "radio":
                 foreach ($options as $key => $value) {
                     $radioId = "$fieldName" . "_" . "$key";
-                    echo "<input type='$type' name='$fieldName' id='$radioId' ";
+                    echo "<input class='radio' type='$type' name='$fieldName' id='$radioId' ";
                     if ($key == $fieldValue) echo " checked ";
                     echo "value='$key'>";
                     echo "<label for='$radioId'>$value</label>";

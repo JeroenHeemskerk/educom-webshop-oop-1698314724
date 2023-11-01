@@ -3,18 +3,23 @@
 require_once('forms_doc.php');
 class LoginDoc extends FormsDoc
 {
+    public $data;
+
+    public function __construct($myData)
+    {
+        $this->data = $myData;
+    }
 
     protected function showHeaderContent()
     {
         echo '<h1 class="headers">Loginpage</h1>';
     }
 
-    protected function showContent($formData)
+    protected function showContent()
     {
-        require_once('form-fields.php');
-        showFormStart();
-        showFormField('email', 'Email:', 'email', $formData);
-        showFormField('password', 'Password:', 'password', $formData);
-        showFormEnd('login', 'submit');
+        $this->showFormStart();
+        $this->showFormField('email', 'Email:', 'email', $this->data);
+        $this->showFormField('password', 'Password:', 'password', $this->data);
+        $this->showFormEnd('login', 'submit');
     }
 }
