@@ -10,15 +10,15 @@ classDiagram
     BasicDoc <|-- HomeDoc
     BasicDoc <|-- AboutDoc
     BasicDoc <|-- FormDoc
-    BasicDoc <|-- ProductServiceDoc
 
     FormDoc <|-- ContactDoc
     FormDoc <|-- LoginDoc
     FormDoc <|-- RegisterDoc
+    FormDoc <|-- ProductActionsDoc
         
-    ProductServiceDoc  <|-- WebshopDoc
-    ProductServiceDoc  <|-- ProductDoc
-    ProductServiceDoc  <|-- ShoppingcartDoc
+    ProductActionsDoc  <|-- WebshopDoc
+    ProductActionsDoc  <|-- ProductDoc
+    ProductActionsDoc  <|-- ShoppingcartDoc
 
 
     class HtmlDoc{
@@ -39,18 +39,18 @@ classDiagram
         -showTitle()
         -showCssLinks()
         #showBodyContent()
-        #showHeader()
+        -showHeader()
         -showMenu()
         #showContent()
         -showFooter()
     }
     class HomeDoc{
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
     class AboutDoc{
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
@@ -63,49 +63,48 @@ classDiagram
 
     class ContactDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
     class LoginDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
     class RegisterDoc{
         #data 
-        #showHeader()
+        #showHeaderContent()
         #showContent()
     }
 
 
-    class ProductServiceDoc{
-        #showHeader()
-        #showContent()
+    class ProductActionsDoc{
+        #showActionButton()
+        #showFormStart()
+        #showFormField()
     }
+
 
     class WebshopDoc{
         #data      
-        +showHeader()
-        +showContent()
+        #showHeaderContent()
+        #showContent()
         -showProductCard()
-        #showActionButton()
     }
 
     class ShoppingcartDoc{
         #data 
-        +showHeader()
-        +showContent()
+        #showHeaderContent()
+        #showContent()
         -showProductLine()
-        #showActionButton()
     }
 
     class ProductDoc{
         #data 
-        +showHeader()
-        +showContent()
+        #showHeaderContent()
+        #showContent()
         -showProduct()
-        #showActionButton()
     }
 
 
