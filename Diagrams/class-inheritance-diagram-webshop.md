@@ -10,11 +10,11 @@ classDiagram
     BasicDoc <|-- HomeDoc
     BasicDoc <|-- AboutDoc
     BasicDoc <|-- FormDoc
-    BasicDoc <|-- ProductServiceDoc
 
     FormDoc <|-- ContactDoc
     FormDoc <|-- LoginDoc
     FormDoc <|-- RegisterDoc
+    FormDoc <|-- ProductServiceDoc
         
     ProductServiceDoc  <|-- WebshopDoc
     ProductServiceDoc  <|-- ProductDoc
@@ -81,7 +81,10 @@ classDiagram
 
     class ProductServiceDoc{
         #showActionButton()
+        #showFormStart()
+        #showFormField()
     }
+
 
     class WebshopDoc{
         #data      
