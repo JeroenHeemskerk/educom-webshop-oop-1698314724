@@ -14,11 +14,11 @@ classDiagram
     FormDoc <|-- ContactDoc
     FormDoc <|-- LoginDoc
     FormDoc <|-- RegisterDoc
-    FormDoc <|-- ProductServiceDoc
+    FormDoc <|-- ProductActionsDoc
         
-    ProductServiceDoc  <|-- WebshopDoc
-    ProductServiceDoc  <|-- ProductDoc
-    ProductServiceDoc  <|-- ShoppingcartDoc
+    ProductActionsDoc  <|-- WebshopDoc
+    ProductActionsDoc  <|-- ProductDoc
+    ProductActionsDoc  <|-- ShoppingcartDoc
 
 
     class HtmlDoc{
@@ -79,7 +79,7 @@ classDiagram
     }
 
 
-    class ProductServiceDoc{
+    class ProductActionsDoc{
         #showActionButton()
         #showFormStart()
         #showFormField()
