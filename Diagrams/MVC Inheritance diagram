@@ -1,6 +1,6 @@
 ```mermaid
 ---
-title: Class Inheritance Diagram - Webshop
+title: MVC Inheritance Diagram - Webshop
 ---
 classDiagram
     note "+ = public, - = private, # = protected"
@@ -10,6 +10,48 @@ classDiagram
     BasicDoc <|-- HomeDoc
     BasicDoc <|-- AboutDoc
     BasicDoc <|-- FormDoc
+
+    FormDoc <|-- ContactDoc
+    FormDoc <|-- LoginDoc
+    FormDoc <|-- RegisterDoc
+    FormDoc <|-- ProductActionsDoc
+        
+    ProductActionsDoc  <|-- WebshopDoc
+    ProductActionsDoc  <|-- ProductDoc
+    ProductActionsDoc  <|-- ShoppingcartDoc
+
+
+    PageModel <|-- UserModel
+
+    class PageModel{
+    #page
+    #isPost
+    #genericErr
+    #sessionManager
+    +getRequestedPage()
+    +createMenuArr()
+    +isLoggedin()
+    }
+
+    class UserModel{
+    #name
+    #email    
+    #password
+    #repeatedPassword
+    #message
+    #salutation
+    #phonenumber
+    #comm_preference
+
+    +validateLogin()
+    +doLoginUser()
+    +doLogoutUser()
+    +authenticateUser()
+
+    #doesEmailExist()
+    #findUserByEmail()
+    
+    }
 
     class HtmlDoc{
        +show()
@@ -22,6 +64,7 @@ classDiagram
        -showBodyEnd()
        -showHtmlEnd()
     }
+
     class BasicDoc{
         #data 
         +__construct(mydata)
@@ -43,3 +86,56 @@ classDiagram
         #showHeaderContent()
         #showContent()
     }
+
+ class FormDoc{
+        #showFormStart()
+        #showFormField()
+        #showFormEnd()
+    }
+
+    class ContactDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+    }
+
+    class LoginDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+    }
+    class RegisterDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+    }
+
+
+    class ProductActionsDoc{
+        #showActionButton()
+        #showFormStart()
+        #showFormField()
+    }
+
+
+    class WebshopDoc{
+        #data      
+        #showHeaderContent()
+        #showContent()
+        -showProductCard()
+    }
+
+    class ShoppingcartDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+        -showProductLine()
+    }
+
+    class ProductDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+        -showProduct()
+    }
+
