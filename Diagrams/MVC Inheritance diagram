@@ -54,10 +54,6 @@ classDiagram
     +doLogoutUser()
     +authenticateUser()
 
-    //database
-    #doesEmailExist()
-    #findUserByEmail()
-    
     }
 
     class ShopModel{
@@ -77,12 +73,6 @@ classDiagram
     #initializeShoppingcartData()
     #getShoppingcartData()
     #getCart()
-
-    //database
-    #getProductsFromDatabase()
-    #findProductById()
-    #writeOrdertoDatabase()
-    #writeOrderlinesToDatabase()
     
     }
 
