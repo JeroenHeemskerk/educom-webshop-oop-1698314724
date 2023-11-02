@@ -1,7 +1,11 @@
 <?php
-include('session-manager.php');
 
-session_start();
+
+
+require_once('controllers/page_controller.php');
+$controller = new PageController();
+$controller->handleRequest();
+
 
 if (!isCartInitialized()) {
     initializeCart();
@@ -184,23 +188,7 @@ function doProcessRegisterRequest()
 //===========================================
 
 
-function getPostVar($key, $default = "")
-{
-    return getArrayVar($_POST, $key, $default);
-};
 
-
-function getUrlVar($key, $default = '')
-{
-    return getArrayVar($_GET, $key, $default);
-};
-
-
-function getArrayVar($array, $key, $default = '')
-{
-    return isset($array[$key]) ? $array[$key] : $default;
-    // return isset($_GET['id']) ? ...
-}
 
 // ===================================================
 

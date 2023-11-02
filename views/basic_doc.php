@@ -27,7 +27,7 @@ class BasicDoc extends HtmlDoc
     private function showCssLinks()
     {
         echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="CSS/stylesheet.css">';
+        <link rel="stylesheet" href="../CSS/stylesheet.css">';
     }
     //========================================
 
@@ -60,7 +60,7 @@ class BasicDoc extends HtmlDoc
     {
         echo "<nav>";
         echo "<ul class='menu'>";
-        foreach ($this->data['menu'] as $key => $page) {
+        foreach ($this->data->menu as $key => $page) {
             $this->showMenuItem($key, $page);
         }
         echo '</ul>' . PHP_EOL . '</nav>' . PHP_EOL;
@@ -88,15 +88,15 @@ class BasicDoc extends HtmlDoc
 
     private function showGenericError()
     {
-        if (isset($this->data["genericErr"])) {
-            echo "</br><span class='error'>" . $this->data["genericErr"] . "</span></br></br>";
+        if (isset($this->data->genericErr)) {
+            echo "</br><span class='error'>" . $this->data->genericErr . "</span></br></br>";
         }
     }
 
     private function showGenericMessage()
     {
-        if (isset($this->data["genericMessage"])) {
-            echo "</br><span >" . $this->data["genericMessage"] . "</span></br></br>";
+        if (isset($this->data->genericMessage)) {
+            echo "</br><span >" . $this->data->genericMessage . "</span></br></br>";
         }
     }
 }
