@@ -60,6 +60,8 @@ classDiagram
     #phonenumber
     #comm_preference
     #message
+    -userId
+    +valid
 
     #salutationErr
     #nameErr
