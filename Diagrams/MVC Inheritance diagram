@@ -22,34 +22,67 @@ classDiagram
 
 
     PageModel <|-- UserModel
+    Pagemodel <|-- ShopModel
 
     class PageModel{
-    #page
+    +page
     #isPost
-    #genericErr
+    +menu
+    +errors
+    +genericErr
     #sessionManager
+
+    __construct()
     +getRequestedPage()
     +createMenuArr()
     +isLoggedin()
     }
 
     class UserModel{
-    #name
-    #email    
-    #password
+    +name
+    +email    
+    +password
     #repeatedPassword
     #message
     #salutation
     #phonenumber
     #comm_preference
 
+    __construct()
     +validateLogin()
     +doLoginUser()
     +doLogoutUser()
     +authenticateUser()
 
+    //database
     #doesEmailExist()
     #findUserByEmail()
+    
+    }
+
+    class ShopModel{
+    #products
+    #product
+    #productLine
+    #subTotal
+    #image_url
+    #name
+    #pricetag
+    #id
+    #amount
+    #cart
+
+    #initializeWebshopData()
+    #getWebshopData()
+    #initializeShoppingcartData()
+    #getShoppingcartData()
+    #getCart()
+
+    //database
+    #getProductsFromDatabase()
+    #findProductById()
+    #writeOrdertoDatabase()
+    #writeOrderlinesToDatabase()
     
     }
 
@@ -66,6 +99,8 @@ classDiagram
     }
 
     class BasicDoc{
+        #model
+        #controller
         #data 
         +__construct(mydata)
         #showHeaderContent()
