@@ -20,9 +20,20 @@ classDiagram
     ProductActionsDoc  <|-- ProductDoc
     ProductActionsDoc  <|-- ShoppingcartDoc
 
-
     PageModel <|-- UserModel
     Pagemodel <|-- ShopModel
+
+
+    class PageController(){
+    -model
+
+    +__construct()
+    +handleRequest()
+    -getRequest()
+    -processRequest()
+    -showResponse()
+    }
+
 
     class PageModel{
     +page
@@ -32,23 +43,34 @@ classDiagram
     +genericErr
     #sessionManager
 
-    __construct()
+    __construct($copy)
     +getRequestedPage()
-    +createMenuArr()
+    #setPage()
+    #getUrlVar
+    +createMenu()
     +isLoggedin()
     }
 
     class UserModel{
+    #salutation
     +name
     +email    
     +password
     #repeatedPassword
-    #message
-    #salutation
     #phonenumber
     #comm_preference
+    #message
 
-    __construct()
+    #salutationErr
+    #nameErr
+    #emailErr
+    #passwordErr
+    #genericErr
+    #phonenumberErr
+    #comm_preferenceErr
+    #messageErr
+    
+    __construct($pageModel)
     +validateLogin()
     +doLoginUser()
     +doLogoutUser()
@@ -68,6 +90,7 @@ classDiagram
     #amount
     #cart
 
+    __construct()
     #initializeWebshopData()
     #getWebshopData()
     #initializeShoppingcartData()
