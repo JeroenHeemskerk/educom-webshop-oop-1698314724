@@ -31,9 +31,27 @@ class UserModel extends PageModel
 
     public function validateLogin()
     {
-
+        require_once('validations.php');
+        $validations = new Validators();
         // .. hier moet de juiste functie in
+        //logindata?
 
+        $loginData = $validations->collectAndValidateEmail($loginData, "email", "Email");
+        $loginData = $validations->collectRequiredField($loginData, 'password', "Password");
+
+        $this->valid = empty($this->emailErr) && empty($this->passwordErr);
+
+        if ($this->valid == true) {
+            $loginData = validateLoginAttempt($loginData);
+        }
+
+        if ($this->valid == true) {
+            $this->page = 'home';
+        }
+
+        return $loginData;
+
+        //dit komt uit de opdracht, niet mijn eigen code
         $this->valid = true;
     }
 

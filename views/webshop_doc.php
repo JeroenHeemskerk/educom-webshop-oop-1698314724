@@ -27,7 +27,7 @@ class WebshopDoc extends ProductActionsDoc
 
     private function showProductCard($product)
     {
-        require_once('session-manager.php');
+        require_once('../session-manager.php');
         $userIsLoggedIn = isUserLoggedIn();
 
         echo

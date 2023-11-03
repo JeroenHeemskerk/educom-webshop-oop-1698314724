@@ -2,11 +2,11 @@
 
 class PageModel
 {
-
     public $page;
     protected $isPost;
-    public $menu;
-    public $errors = array();
+    public $menu = [];
+    // menu = assoc array
+    public $errors = [];
     public $genericErr = "";
     protected $sessionManager;
 
@@ -32,7 +32,6 @@ class PageModel
     }
 
 
-
     public function getRequestedPage()
     {
         $this->isPost = ($_SERVER['REQUEST_METHOD'] == 'POST');
@@ -53,22 +52,25 @@ class PageModel
         $this->page = $newPage;
     }
 
-
-
     public function createMenu()
     {
-        $this->menu['home'] = [];
-        //new MenuItem('home', 'HOME');
-        // $this->menu['about'] = new MenuItem('about', 'ABOUT');
-        // $this->menu['contact'] = new MenuItem('contact', 'CONTACT');
-        // $this->menu['webshop'] = new MenuItem('webshop', 'WEBSHOP');
+        require_once("menu-item.php");
 
-        // if ($this->sessionManager->isUserLoggedIn()) {
-        //     $this->menu['logout'] = new MenuItem(
-        //         'logout',
-        //         'LOGOUT',
-        //         $this->sessionManager->getLoggedInUser()['name']
-        //     );
-        // }
+        $this->menu['home'] = new MenuItem('home', 'HOME');
+        $this->menu['about'] = new MenuItem('about', 'ABOUT');
+        $this->menu['contact'] = new MenuItem('contact', 'CONTACT');
+        $this->menu['webshop'] = new MenuItem('webshop', 'WEBSHOP');
+
+        if ($this->sessionManager->isUserLoggedIn()) {
+            $this->menu['shoppingcart'] = new MenuItem('shoppingcart', 'SHOPPING CART');
+            $this->menu['logout'] = new MenuItem(
+                'logout',
+                'LOGOUT ' .
+                    $this->sessionManager->getLoggedInUserName()
+            );
+        } else {
+            $this->menu['login'] = new MenuItem('login', 'LOGIN');
+            $this->menu['register'] = new MenuItem('register', 'REGISTER');
+        }
     }
 }

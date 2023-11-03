@@ -50,7 +50,8 @@ class SessionManager
 
     public function addToCart($productId)
     {
-        $_SESSION['cart'][$productId] = getArrayVar($_SESSION['cart'], $productId, 0) + 1;
+        require_once('util.php');
+        $_SESSION['cart'][$productId] = Util::getArrayVar($_SESSION['cart'], $productId, 0) + 1;
     }
 
     public function removeFromCart($productId)

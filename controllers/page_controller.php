@@ -82,6 +82,9 @@ class PageController
                 require_once('views/shoppingcart_doc.php');
                 $view = new ShoppingcartDoc($this->model);
                 break;
+            default:
+                require_once('views/not_found_doc.php');
+                $view = new NotFoundDoc($this->model);
         }
         $view->show();
     }

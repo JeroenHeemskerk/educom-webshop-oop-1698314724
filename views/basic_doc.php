@@ -27,7 +27,7 @@ class BasicDoc extends HtmlDoc
     private function showCssLinks()
     {
         echo '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="../CSS/stylesheet.css">';
+        <link rel="stylesheet" href="CSS/stylesheet.css">';
     }
     //========================================
 
@@ -58,10 +58,9 @@ class BasicDoc extends HtmlDoc
 
     private function showMenu()
     {
-        echo "<nav>";
-        echo "<ul class='menu'>";
-        foreach ($this->data->menu as $key => $page) {
-            $this->showMenuItem($key, $page);
+        echo "<nav><ul class='menu'>";
+        foreach ($this->data->menu as $menuItem) {
+            $this->showMenuItem($menuItem->linkValue, $menuItem->buttonText);
         }
         echo '</ul>' . PHP_EOL . '</nav>' . PHP_EOL;
     }
@@ -75,7 +74,6 @@ class BasicDoc extends HtmlDoc
     {
         //deze functie ga ik 'overriden' 
         //default neerzetten
-        //als de pagina niet wordt gevonden dan laat hij dit zien. Anders override hij 
         echo 'Page not found';
     }
 

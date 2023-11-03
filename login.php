@@ -31,6 +31,7 @@ function showLoginForm($formData)
 
 function validateLoginAttempt($loginData)
 {
+
     require_once('database-connection.php');
     $email = $loginData['email'];
     $password = $loginData['password'];
