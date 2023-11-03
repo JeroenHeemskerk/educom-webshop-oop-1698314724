@@ -1,0 +1,191 @@
+```mermaid
+---
+title: MVC Inheritance Diagram - Webshop
+---
+classDiagram
+    note "+ = public, - = private, # = protected"
+    %% A <|-- B means that class B inherits from class A %%
+    HtmlDoc <|-- BasicDoc
+
+    BasicDoc <|-- HomeDoc
+    BasicDoc <|-- AboutDoc
+    BasicDoc <|-- FormDoc
+
+    FormDoc <|-- ContactDoc
+    FormDoc <|-- LoginDoc
+    FormDoc <|-- RegisterDoc
+    FormDoc <|-- ProductActionsDoc
+        
+    ProductActionsDoc  <|-- WebshopDoc
+    ProductActionsDoc  <|-- ProductDoc
+    ProductActionsDoc  <|-- ShoppingcartDoc
+
+    PageModel <|-- UserModel
+    Pagemodel <|-- ShopModel
+
+
+    class PageController(){
+    -model
+
+    +__construct()
+    +handleRequest()
+    -getRequest()
+    -processRequest()
+    -showResponse()
+    }
+
+
+    class PageModel{
+    +page
+    #isPost
+    +menu
+    +errors
+    +genericErr
+    #sessionManager
+
+    __construct($copy)
+    +getRequestedPage()
+    #setPage()
+    #getUrlVar
+    +createMenu()
+    +isLoggedin()
+    }
+
+    class UserModel{
+    #salutation
+    +name
+    +email    
+    +password
+    #repeatedPassword
+    #phonenumber
+    #comm_preference
+    #message
+    -userId
+    +valid
+
+    #salutationErr
+    #nameErr
+    #emailErr
+    #passwordErr
+    #genericErr
+    #phonenumberErr
+    #comm_preferenceErr
+    #messageErr
+    
+    __construct($pageModel)
+    +validateLogin()
+    +doLoginUser()
+    +doLogoutUser()
+    +authenticateUser()
+
+    }
+
+    class ShopModel{
+    #products
+    #product
+    #productLine
+    #subTotal
+    #image_url
+    #name
+    #pricetag
+    #id
+    #amount
+    #cart
+
+    __construct()
+    #initializeWebshopData()
+    #getWebshopData()
+    #initializeShoppingcartData()
+    #getShoppingcartData()
+    #getCart()
+    
+    }
+
+    class HtmlDoc{
+       +show()
+       -showHtmlStart()
+       -showHeaderStart()
+       #showHeaderContent()
+       -showHeaderEnd()
+       -showBodyStart()
+       #showBodyContent()
+       -showBodyEnd()
+       -showHtmlEnd()
+    }
+
+    class BasicDoc{
+        #model
+        #controller
+        #data 
+        +__construct(mydata)
+        #showHeaderContent()
+        -showTitle()
+        -showCssLinks()
+        #showBodyContent()
+        -showHeader()
+        -showMenu()
+        #showContent()
+        -showFooter()
+    }
+    class HomeDoc{
+        #showHeaderContent()
+        #showContent()
+    }
+
+    class AboutDoc{
+        #showHeaderContent()
+        #showContent()
+    }
+
+ class FormDoc{
+        #showFormStart()
+        #showFormField()
+        #showFormEnd()
+    }
+
+    class ContactDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+    }
+
+    class LoginDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+    }
+    class RegisterDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+    }
+
+
+    class ProductActionsDoc{
+        #showActionButton()
+        #showFormStart()
+        #showFormField()
+    }
+
+
+    class WebshopDoc{
+        #data      
+        #showHeaderContent()
+        #showContent()
+        -showProductCard()
+    }
+
+    class ShoppingcartDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+        -showProductLine()
+    }
+
+    class ProductDoc{
+        #data 
+        #showHeaderContent()
+        #showContent()
+        -showProduct()
+    }
+
