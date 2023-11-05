@@ -15,7 +15,7 @@ class PageController
     public function handleRequest()
     {
         $this->getRequest();
-        // $this->processRequest();
+        $this->processRequest();
         $this->showResponse();
     }
 
@@ -28,20 +28,53 @@ class PageController
     }
 
     //business flow code:
-    // private function processRequest()
-    // {
-    //     switch ($this->model->page) {
-    //         case 'login':
-    //             $this->model = new UserModel($this->model);
-    //             $this->model->validateLogin();
-    //             if ($this->model->valid) {
-    //                 $this->model->doLoginUser();
-    //                 $this->model->setPage("home");
-    //             }
-    //             break;
-    //             //andere switch cases komen hier
-    //     }
-    // }
+    private function processRequest()
+    {
+        switch ($this->model->page) {
+            case 'login':
+                require_once('models/user_model.php');
+                $this->model = new UserModel($this->model);
+                if ($this->model->isPost) {
+                    $this->model->validateLogin();
+                    if ($this->model->valid) {
+                        $this->model->doLoginUser();
+                        $this->model->setPage("home");
+                    }
+                }
+                break;
+            case 'register':
+                require_once('models/user_model.php');
+                $this->model = new UserModel($this->model);
+                $this->model->validateLogin();
+                if ($this->model->valid) {
+                    $this->model->doLoginUser();
+                    $this->model->setPage("home");
+                }
+                break;
+            case 'contact':
+                require_once('models/user_model.php');
+                $this->model = new UserModel($this->model);
+                $this->model->validateLogin();
+                if ($this->model->valid) {
+                    $this->model->doLoginUser();
+                    $this->model->setPage("home");
+                }
+                break;
+            case 'webshop':
+                $this->model = new ShopModel($this->model);
+                break;
+            case 'product':
+                $this->model = new ShopModel($this->model);
+                break;
+            case 'shoppingcart':
+                $this->model = new ShopModel($this->model);
+                break;
+            case 'logout':
+                $this->model = new UserModel($this->model);
+                break;
+                //andere switch cases komen hier
+        }
+    }
 
 
     //dit gaat naar de client toe -> UI laag

@@ -3,7 +3,7 @@
 class Validators
 {
 
-    public function test_input($data)
+    public static function test_input($data)
     {
         $data = trim($data);
         $data = stripslashes($data);
@@ -11,67 +11,58 @@ class Validators
         return $data;
     }
 
-
-    public function collectRequiredField($data, $key, $label)
+    public static function collectRequiredField($userModel, $key, $label)
     {
-        $data[$key] = $this->test_input(Util::getPostVar($key));
-        if (empty($data[$key])) {
-            $data[$key . 'Err'] = "*$label is required";
+        require_once("util.php");
+        $userModel->$key = self::test_input(Util::getPostVar($key));
+        if (empty($userModel->$key)) {
+            $errorKey = $key . 'Err';
+            $userModel->$errorKey = "*$label is required";
         }
-        return $data;
     }
 
-    public function collectAndValidateEmail($data, $key, $label)
+    public static function collectAndValidateEmail($userModel, $key, $label)
     {
-        $data = $this->collectRequiredField($data, $key, $label);
+        self::collectRequiredField($userModel, $key, $label);
         // check if e-mail address is well-formed 
-        if (empty($data[$key . 'Err']) && !filter_var($data[$key], FILTER_VALIDATE_EMAIL)) {
-            $data[$key . 'Err'] = "*Invalid email format";
+        $errorKey = $key . 'Err';
+        if (empty($userModel->$errorKey) && !filter_var($userModel->$key, FILTER_VALIDATE_EMAIL)) {
+            $userModel->$errorKey = "*Invalid email format";
         }
-        return $data;
     }
 
-    public function collectAndValidateName($data, $key, $label)
+    public static function collectAndValidateName($userModel, $key, $label)
     {
-        $data = $this->collectRequiredField($data, $key, $label);
+        self::collectRequiredField($userModel, $key, $label);
 
         // check if name only contains letters and whitespace
-        if (!preg_match("/^[a-zA-Z-' ]*$/", $data[$key])) {
-            $data[$key . 'Err'] = "*Only letters and white space allowed";
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $userModel->$key)) {
+            $errorKey = $key . 'Err';
+            $userModel->$errorKey = "*Only letters and white space allowed";
         }
-        return $data;
     }
 
     //====================================================
 
-    public function validateLogin($loginData)
+    public static function validateLogin($userModel)
     {
-        $loginData = $this->collectAndValidateEmail($loginData, "email", "Email");
-        $loginData = $this->collectRequiredField($loginData, 'password', "Password");
+        self::collectAndValidateEmail($userModel, "email", "Email");
+        self::collectRequiredField($userModel, 'password', "Password");
 
-        $loginData['valid'] = empty($loginData['emailErr']) && empty($loginData['passwordErr']);
-
-        if ($loginData['valid'] == true) {
-            $loginData = validateLoginAttempt($loginData);
-        }
-
-        if ($loginData['valid'] == true) {
-            $loginData['page'] = 'home';
-        }
-
-        return $loginData;
+        $userModel->valid = empty($userModel->emailErr) && empty($userModel->passwordErr);
     }
 
-    public function validateRegister($registerData)
+
+    public static function validateRegister($registerData)
     {
-        $registerData = $this->collectAndValidateName($registerData, "name", "Name");
-        $registerData = $this->collectAndValidateEmail($registerData, "email", "Email");
-        $registerData = $this->collectRequiredField($registerData, "password", "Password");
+        $registerData = self::collectAndValidateName($registerData, "name", "Name");
+        $registerData = self::collectAndValidateEmail($registerData, "email", "Email");
+        $registerData = self::collectRequiredField($registerData, "password", "Password");
 
         if (empty(Util::getPostVar("repeatedPassword"))) {
             $registerData['repeatedPasswordErr'] = "*Password is required";
         } else {
-            $registerData['repeatedPassword'] = $this->test_input(Util::getPostVar("repeatedPassword"));
+            $registerData['repeatedPassword'] = self::test_input(Util::getPostVar("repeatedPassword"));
             if ($registerData['password'] != $registerData['repeatedPassword']) {
                 $registerData['passwordErr'] = $registerData['repeatedPasswordErr'] = "*Passwords do not match";
             }
@@ -82,16 +73,16 @@ class Validators
         return $registerData;
     }
 
-    public function validateContact($contactData)
+    public static function validateContact($contactData)
     {
         // validate for the 'POST' data
 
-        $contactData = $this->collectRequiredField($contactData, "salutation", "Salutation");
-        $contactData = $this->collectAndValidateName($contactData, "name", "Name");
-        $contactData = $this->collectAndValidateEmail($contactData, "email", "Email");
-        $contactData = $this->collectRequiredField($contactData, "phonenumber", "Phonenumber");
-        $contactData = $this->collectRequiredField($contactData, "comm_preference", "Communication preference");
-        $contactData = $this->collectRequiredField($contactData, "message", "Message");
+        $contactData = self::collectRequiredField($contactData, "salutation", "Salutation");
+        $contactData = self::collectAndValidateName($contactData, "name", "Name");
+        $contactData = self::collectAndValidateEmail($contactData, "email", "Email");
+        $contactData = self::collectRequiredField($contactData, "phonenumber", "Phonenumber");
+        $contactData = self::collectRequiredField($contactData, "comm_preference", "Communication preference");
+        $contactData = self::collectRequiredField($contactData, "message", "Message");
 
         if (empty($contactData['salutationErr']) && empty($contactData['nameErr']) && empty($contactData['emailErr']) && empty($contactData['phonenumberErr']) && empty($contactData['comm_preferenceErr']) && empty($contactData['messageErr'])) {
             $contactData['valid'] = true;

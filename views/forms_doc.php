@@ -16,7 +16,7 @@ class FormsDoc extends BasicDoc
     protected function showFormField($fieldName, $label, $type, $formData, $options = NULL)
     {
         echo "<label for='$fieldName'>$label</label>";
-        $fieldValue = $formData[$fieldName];
+        $fieldValue = $formData->$fieldName;
 
         switch ($type) {
 
@@ -49,7 +49,8 @@ class FormsDoc extends BasicDoc
                 echo "<input type='$type' name='$fieldName' id='$fieldName' value='$fieldValue'>";
         }
 
-        echo "</br><span class='error'>" . $formData[$fieldName . 'Err'] . "</span></br></br>";
+        $errorFieldName = $fieldName . 'Err';
+        echo "</br><span class='error'>" . $formData->$errorFieldName . "</span></br></br>";
     }
 
     protected function showFormEnd($page, $submitButtonText)

@@ -7,10 +7,10 @@ class SessionManager
         session_start();
     }
 
-    public function doLoginUser($user)
+    public function doLoginUser($userName, $userId)
     {
-        $_SESSION['name'] = $user['name'];
-        $_SESSION['id'] = $user['id'];
+        $_SESSION['name'] = $userName;
+        $_SESSION['id'] = $userId;
     }
 
     public function isUserLoggedIn()

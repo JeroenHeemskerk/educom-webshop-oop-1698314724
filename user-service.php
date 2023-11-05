@@ -1,20 +1,19 @@
 <?php
 
-function authenticateUser($user, $password)
+class UserService
 {
-    if (trim($user['password']) == $password) {
-        $result = RESULT_OK;
-    } else {
-        $result = RESULT_WRONG_PASSWORD;
+
+    public static function authenticateUser($user, $password)
+    {
+        return trim($user['password']) == $password;
     }
 
-    return $result;
-}
 
-function doesEmailExist($email)
-{
-    require_once('database-connection.php');
-    $result = findUserByEmail($email);
+    public static function doesEmailExist($email)
+    {
+        require_once('database-connection.php');
+        $result = DatabaseConnection::findUserByEmail($email);
 
-    return $result != null;
+        return $result != null;
+    }
 }

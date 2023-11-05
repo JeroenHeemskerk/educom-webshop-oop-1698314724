@@ -3,11 +3,12 @@
 class PageModel
 {
     public $page;
-    protected $isPost;
+    public $isPost;
     public $menu = [];
     // menu = assoc array
     public $errors = [];
     public $genericErr = "";
+    public $genericMessage = "";
     protected $sessionManager;
 
 
@@ -22,7 +23,7 @@ class PageModel
             require_once('session-manager.php');
             $this->sessionManager = new SessionManager();
         } else {
-            //=> called from the constructor of an extended classs
+            //=> called from the constructor of an extended class (pagemodel of shopmodel)
             $this->page = $copy->page;
             $this->isPost = $copy->isPost;
             $this->menu = $copy->menu;
@@ -45,7 +46,7 @@ class PageModel
     }
 
 
-    protected function setPage($newPage)
+    public function setPage($newPage)
     {
         // deze functie stopt iets in page
         //in (new)page zit óf default 'home' of de value van page (een andere pagina). 
