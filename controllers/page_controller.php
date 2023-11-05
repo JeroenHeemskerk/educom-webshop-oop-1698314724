@@ -45,34 +45,44 @@ class PageController
             case 'register':
                 require_once('models/user_model.php');
                 $this->model = new UserModel($this->model);
-                $this->model->validateLogin();
-                if ($this->model->valid) {
-                    $this->model->doLoginUser();
-                    $this->model->setPage("home");
+                if ($this->model->isPost) {
+                    $this->model->registerUser();
+                    if ($this->model->valid) {
+                        $this->model->setPage("login");
+                    }
                 }
                 break;
             case 'contact':
                 require_once('models/user_model.php');
                 $this->model = new UserModel($this->model);
-                $this->model->validateLogin();
-                if ($this->model->valid) {
-                    $this->model->doLoginUser();
-                    $this->model->setPage("home");
+                if ($this->model->isPost) {
+                    $this->model->validateContact();
                 }
                 break;
             case 'webshop':
+                require_once('models/shop_model.php');
                 $this->model = new ShopModel($this->model);
+                $this->model->handleActions();
+                $this->model->getWebshopData();
                 break;
             case 'product':
+                require_once('models/shop_model.php');
                 $this->model = new ShopModel($this->model);
+                $this->model->handleActions();
+                $this->model->getProductData();
                 break;
             case 'shoppingcart':
+                require_once('models/shop_model.php');
                 $this->model = new ShopModel($this->model);
+                $this->model->handleActions();
+                $this->model->getShoppingcartData();
                 break;
             case 'logout':
+                require_once('models/user_model.php');
                 $this->model = new UserModel($this->model);
+                $this->model->sessionManager->doLogOut();
+                $this->model->setPage("home");
                 break;
-                //andere switch cases komen hier
         }
     }
 

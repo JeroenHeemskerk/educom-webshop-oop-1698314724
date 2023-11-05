@@ -4,6 +4,7 @@ require_once('page_model.php');
 
 class UserModel extends PageModel
 {
+    public $salutation;
     public $name = ""; // of $values = array();
     public $email = ""; //or $meta = array();
     public $password = "";
@@ -11,9 +12,11 @@ class UserModel extends PageModel
     public $phonenumber = "";
     public $comm_preference = "";
     public $message = "";
-    public $namerErr = "";
+    public $salutationErr;
+    public $nameErr = "";
     public $emailErr = "";
     public $passwordErr = "";
+    public $repeatedPasswordErr = "";
     public $phonenumberErr = "";
     public $comm_preferenceErr = "";
     public $messageErr = "";
@@ -21,6 +24,7 @@ class UserModel extends PageModel
     public $valid = false;
     public $userName;
     public $userId;
+
 
     public function __construct($pageModel)
     {
@@ -37,6 +41,23 @@ class UserModel extends PageModel
             $this->authenticateUser();
         }
     }
+
+    public function registerUser()
+    {
+        require_once("validators.php");
+        require_once("database-connection.php");
+        Validators::validateRegister($this);
+        if ($this->valid) {
+            DatabaseConnection::saveUser($this->email, $this->name, $this->password);
+        }
+    }
+
+    public function validateContact()
+    {
+        require_once("validators.php");
+        Validators::validateContact($this);
+    }
+
 
     private function authenticateUser()
     {

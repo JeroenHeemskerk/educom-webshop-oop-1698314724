@@ -9,7 +9,7 @@ class PageModel
     public $errors = [];
     public $genericErr = "";
     public $genericMessage = "";
-    protected $sessionManager;
+    public $sessionManager;
 
 
     public function __construct($copy)

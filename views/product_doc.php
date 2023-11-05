@@ -17,21 +17,18 @@ class ProductDoc extends ProductActionsDoc
 
     protected function showContent()
     {
-        $product = $this->data['product'];
-        $userIsLoggedIn = $this->data['userLoggedIn'];
-        $this->showProduct($product, $userIsLoggedIn);
+        $product = $this->data->product;
+        $this->showProduct($product);
     }
 
-    private function showProduct($product, $userIsLoggedIn)
+    private function showProduct($product)
     {
         echo "<div class='card-body'> <img class = 'product-img' src='" . $product['image_url'] . "' alt='soap image' width='400' height='300'></br>
     <h4 class = 'card-title'>" . $product["name"] . "</h4></br>
     <p class = 'card-text'>" . $product["description"] . "</p></br>
     &#8364;" . number_format(($product['pricetag'] / 100), 2, ',') . "</br> </div>";
-        //button gedeelte conditioneel gemaakt
-        if ($userIsLoggedIn) {
+        if ($this->data->sessionManager->isUserLoggedIn()) {
             $this->showActionButton('product', 'add to cart', 'addToCart', $product["id"]);
         }
-        //maak een extra hidden input, geef hem als naam: action en als value 'addToCart'
     }
 }

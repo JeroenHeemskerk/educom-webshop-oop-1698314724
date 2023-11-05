@@ -6,6 +6,9 @@ class ContactDoc extends FormsDoc
 
     public $data;
 
+    public const SALUTATIONS = array("mr." => "Dhr.", "mrs." => "Mvr.");
+    public const COMM_PREFS = array("email" => "Email", "phone" => "Phone");
+
     public function __construct($myData)
     {
         $this->data = $myData;
@@ -18,7 +21,7 @@ class ContactDoc extends FormsDoc
 
     protected function showContent()
     {
-        if (!$this->data['valid']) {
+        if (!$this->data->valid) {
             $this->showContactForm($this->data);
         } else {
             $this->showContactThanks($this->data);
@@ -40,10 +43,10 @@ class ContactDoc extends FormsDoc
     private function showContactThanks($contactData)
     {
         echo ' <p>Bedankt voor uw reactie:</p>
-         <div>Name:' . self::SALUTATIONS[$contactData['salutation']] . " " . $contactData['name'] . '</div>
-         <div>Email:' . $contactData['email'] . '</div>
-         <div>Phonenumber:' . $contactData['phonenumber'] . '</div>
-         <div>Communication preference:' . COMM_PREFS[$contactData['comm_preference']] . '</div>
-         <div>Your message:' . $contactData['message'] . '</div>';
+         <div>Name:' . self::SALUTATIONS[$contactData->salutation] . " " . $contactData->name . '</div>
+         <div>Email:' . $contactData->email . '</div>
+         <div>Phonenumber:' . $contactData->phonenumber . '</div>
+         <div>Communication preference:' . self::COMM_PREFS[$contactData->comm_preference] . '</div>
+         <div>Your message:' . $contactData->message . '</div>';
     }
 }

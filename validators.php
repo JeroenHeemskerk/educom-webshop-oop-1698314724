@@ -53,43 +53,46 @@ class Validators
     }
 
 
-    public static function validateRegister($registerData)
+    public static function validateRegister($userModel)
     {
-        $registerData = self::collectAndValidateName($registerData, "name", "Name");
-        $registerData = self::collectAndValidateEmail($registerData, "email", "Email");
-        $registerData = self::collectRequiredField($registerData, "password", "Password");
+        self::collectAndValidateName($userModel, "name", "Name");
+        self::collectAndValidateEmail($userModel, "email", "Email");
+        self::collectRequiredField($userModel, "password", "Password");
 
-        if (empty(Util::getPostVar("repeatedPassword"))) {
-            $registerData['repeatedPasswordErr'] = "*Password is required";
+        if (empty(Util::getPostVar('repeatedPassword'))) {
+            $userModel->repeatedPasswordErr = "*Password is required";
         } else {
-            $registerData['repeatedPassword'] = self::test_input(Util::getPostVar("repeatedPassword"));
-            if ($registerData['password'] != $registerData['repeatedPassword']) {
-                $registerData['passwordErr'] = $registerData['repeatedPasswordErr'] = "*Passwords do not match";
+            $userModel->repeatedPassword = self::test_input(Util::getPostVar('repeatedPassword'));
+            if ($userModel->password != $userModel->repeatedPassword) {
+                $userModel->passwordErr = $userModel->repeatedPasswordErr = "*Passwords do not match";
             }
         }
 
-        $registerData['valid'] = empty($registerData['nameErr']) && empty($registerData['emailErr']) && empty($registerData['passwordErr']) && empty($registerData['repeatedPasswordErr']);
+        require_once("user-service.php");
+        if (!empty($userModel->email) && UserService::doesEmailExist(Util::getPostVar('email'))) {
+            $userModel->emailErr = "*User with this email already exists in database.";
+        }
 
-        return $registerData;
+        $userModel->valid = empty($userModel->nameErr) && empty($userModel->emailErr) && empty($userModel->passwordErr) && empty($userModel->repeatedPasswordErr);
     }
 
-    public static function validateContact($contactData)
+
+
+    public static function validateContact($userModel)
     {
         // validate for the 'POST' data
 
-        $contactData = self::collectRequiredField($contactData, "salutation", "Salutation");
-        $contactData = self::collectAndValidateName($contactData, "name", "Name");
-        $contactData = self::collectAndValidateEmail($contactData, "email", "Email");
-        $contactData = self::collectRequiredField($contactData, "phonenumber", "Phonenumber");
-        $contactData = self::collectRequiredField($contactData, "comm_preference", "Communication preference");
-        $contactData = self::collectRequiredField($contactData, "message", "Message");
+        self::collectRequiredField($userModel, "salutation", "Salutation");
+        self::collectAndValidateName($userModel, "name", "Name");
+        self::collectAndValidateEmail($userModel, "email", "Email");
+        self::collectRequiredField($userModel, "phonenumber", "Phonenumber");
+        self::collectRequiredField($userModel, "comm_preference", "Communication preference");
+        self::collectRequiredField($userModel, "message", "Message");
 
-        if (empty($contactData['salutationErr']) && empty($contactData['nameErr']) && empty($contactData['emailErr']) && empty($contactData['phonenumberErr']) && empty($contactData['comm_preferenceErr']) && empty($contactData['messageErr'])) {
-            $contactData['valid'] = true;
+        if (empty($userModel->salutationErr) && empty($userModel->nameErr) && empty($userModel->emailErr) && empty($userModel->phonenumberErr) && empty($userModel->comm_preferenceErr) && empty($userModel->messageErr)) {
+            $userModel->valid = true;
         } else {
-            $contactData['valid'] = false;
+            $userModel->valid = false;
         }
-
-        return $contactData;
     }
 }

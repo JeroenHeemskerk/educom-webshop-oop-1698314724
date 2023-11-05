@@ -5,9 +5,6 @@ require_once("basic_doc.php");
 class FormsDoc extends BasicDoc
 {
 
-    public const SALUTATIONS = array("mr." => "Dhr.", "mrs." => "Mvr.");
-    public const COMM_PREFS = array("email" => "Email", "phone" => "Phone");
-
     protected function showFormStart()
     {
         echo "<form method='POST' action='index.php'>";

@@ -18,7 +18,8 @@ class WebshopDoc extends ProductActionsDoc
 
     protected function showContent()
     {
-        $productsArray = $this->data['products'];
+        $productsArray = $this->data->products;
+        //array met arrays(per product)
 
         foreach ($productsArray as $product) {
             $this->showProductCard($product);
@@ -27,8 +28,7 @@ class WebshopDoc extends ProductActionsDoc
 
     private function showProductCard($product)
     {
-        require_once('../session-manager.php');
-        $userIsLoggedIn = isUserLoggedIn();
+        $userIsLoggedIn = $this->data->sessionManager->isUserLoggedIn();
 
         echo
         "<div class='card text-center card-outer-container' style='width: 50rem'>

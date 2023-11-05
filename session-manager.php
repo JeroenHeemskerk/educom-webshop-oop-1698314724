@@ -11,6 +11,7 @@ class SessionManager
     {
         $_SESSION['name'] = $userName;
         $_SESSION['id'] = $userId;
+        $this->initializeCart();
     }
 
     public function isUserLoggedIn()
@@ -33,19 +34,14 @@ class SessionManager
         session_unset();
     }
 
-    public function isCartInitialized()
+    public function getCart()
     {
-        return isset($_SESSION['cart']);
+        return $_SESSION['cart'];
     }
 
     public function initializeCart()
     {
         $_SESSION['cart'] = [];
-    }
-
-    public function getCart()
-    {
-        return $_SESSION['cart'];
     }
 
     public function addToCart($productId)

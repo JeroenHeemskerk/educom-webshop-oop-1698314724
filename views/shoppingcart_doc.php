@@ -16,13 +16,13 @@ class ShoppingcartDoc extends ProductActionsDoc
 
     protected function showContent()
     {
-        $cart = $this->data['cart'];
-        $total = $this->data['total'];
+        $productLines = $this->data->productLines;
+        $total = $this->data->total;
 
         //ik weet vantevoren niet hoeveel producten er in de cart zitten.
         // Dus dan moet ik een loop schrijven
 
-        foreach ($cart as $productLine) {
+        foreach ($productLines as $productLine) {
             $this->showProductLine($productLine);
         }
         echo
