@@ -84,7 +84,8 @@ class UserModel extends PageModel
             $this->userName = $user['name'];
             $this->userId = $user['id'];
         } catch (Exception $e) {
-            // logError("authentication failed: " . $e->getMessage());
+            require_once("logger.php");
+            Logger::logError("authentication failed: " . $e->getMessage());
             $this->valid = false;
             $this->genericErr = "Inloggen is op dit moment niet mogelijk. Probeer het later nog eens.";
         }
@@ -94,8 +95,5 @@ class UserModel extends PageModel
     {
         $this->sessionManager->doLoginUser($this->userName, $this->userId);
         $this->genericMessage = "Login succesvol";
-        //$this->errors['genericError'] = "Login succesvol";
-        // die onderste werkt bij mij
-
     }
 }

@@ -27,7 +27,8 @@ class ShopModel extends PageModel
 
             $this->products = DatabaseConnection::getProductsFromDatabase();
         } catch (Exception $e) {
-            logError("getting products failed: " . $e->getMessage());
+            require_once("logger.php");
+            Logger::logError("getting products failed: " . $e->getMessage());
             $this->genericErr = "Er is een technisch probleem. Probeer het later nog eens.";
         }
 
@@ -52,7 +53,8 @@ class ShopModel extends PageModel
             //in this->product zit nu een assoc array
 
         } catch (Exception $e) {
-            logError("getting product failed: " . $e->getMessage());
+            require_once("logger.php");
+            Logger::logError("getting product failed: " . $e->getMessage());
             $this->genericErr = "Er is een technisch probleem. Probeer het later nog eens.";
         }
     }
@@ -78,7 +80,8 @@ class ShopModel extends PageModel
                 array_push($this->productLines, ['id' => $product['id'], 'name' => $product['name'], 'amount' => $amount, 'subTotal' => $subTotal, 'pricetag' => $product['pricetag'], 'image_url' => $product['image_url']]);
             }
         } catch (Exception $e) {
-            logError("getting products failed: " . $e->getMessage());
+            require_once("logger.php");
+            Logger::logError("getting products failed: " . $e->getMessage());
             $this->genericErr = "Er is een technisch probleem. Probeer het later nog eens.";
         }
     }
@@ -106,7 +109,8 @@ class ShopModel extends PageModel
                     $this->completeOrder($userId);
                     $this->genericMessage = "Bedankt voor je bestelling!";
                 } catch (Exception $e) {
-                    logError("order failed: " . $e->getMessage());
+                    require_once("logger.php");
+                    Logger::logError("order failed: " . $e->getMessage());
                     $this->genericErr = "Bestellen is op dit moment niet mogelijk. Probeer het later nog eens.";
                 }
                 break;

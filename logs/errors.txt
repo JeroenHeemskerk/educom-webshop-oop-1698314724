@@ -1,0 +1,6 @@
+
+authentication failed: Access denied for user 'laura_web_shop_user'@'localhost' (using password: YES)
+authentication failed: Access denied for user 'laura_web_shop_user'@'localhost' (using password: YES)
+authentication failed: Unknown database 'lauras_webshopz'
+authentication failed: php_network_getaddresses: getaddrinfo for localhosty failed: Host is onbekend. 
+authentication failed: Access denied for user 'laura_web_shop_userz'@'localhost' (using password: YES)
