@@ -45,7 +45,7 @@ classDiagram
 
     __construct($copy)
     +getRequestedPage()
-    #setPage()
+    +setPage()
     #getUrlVar
     +createMenu()
     +isLoggedin()
