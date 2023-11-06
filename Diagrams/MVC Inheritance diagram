@@ -178,27 +178,25 @@ classDiagram
 
     class ProductActionsDoc{
         #showActionButton()
-        #showFormStart()
-        #showFormField()
     }
 
 
     class WebshopDoc{
-        #data      
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
         -showProductCard()
     }
 
     class ShoppingcartDoc{
-        #data 
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
         -showProductLine()
     }
 
     class ProductDoc{
-        #data 
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
         -showProduct()
