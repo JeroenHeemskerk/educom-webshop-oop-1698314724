@@ -208,3 +208,55 @@ classDiagram
 
     class Logger{
     + (static) logError()
+    }
+
+    class MenuItem{
+    +linkValue
+    +buttontext
+
+    + __construct()
+    }
+
+    class SessionManager{
+    + __construct()
+    +doLoginUser()
+    +isUserLoggedIn()
+    +getLoggedInUserName()
+    +doLogOut()
+    +getCart()
+    +initializeCart()
+    +addToCart()
+    +removeFromCart()
+    }
+
+    class UserService{
+    + (static) authenticateUser()
+    + (static) doesEmailExist()
+    }
+
+    class Util{
+    + (static) getPostVar()
+    + (static) getUrlVar()
+    + (static) getArrayVar()
+    }
+
+    class Validators{
+    + (static) tets_input()
+    + (static) collectRequiredField()
+    + (static) collectAndValidateEmail()
+    + (static) collectAndValidateName()
+    + (static) validateLogin()
+    + (static) validateRegister()
+    + (static) validateContact()
+    }
+
+    class DatabaseConnection{
+    - (static) connectToDatabase()
+    + (static) findUserByEmail()
+    + (static) saveUser()
+    + (static) getProductsFromDatabase()
+    + (static) findProductById()
+    + (static) writeOrderToDatabase()
+    + (static) writeOrderlinesToDatabase()    
+    }
+
