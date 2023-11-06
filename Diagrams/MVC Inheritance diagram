@@ -9,6 +9,7 @@ classDiagram
 
     BasicDoc <|-- HomeDoc
     BasicDoc <|-- AboutDoc
+    BasicDoc <|-- NotFoundDoc
     BasicDoc <|-- FormDoc
 
     FormDoc <|-- ContactDoc
@@ -143,6 +144,11 @@ classDiagram
         #showContent()
     }
 
+    class NotFoundDoc{
+        #showHeaderContent()
+        #showContent()
+    }
+
  class FormDoc{
         #showFormStart()
         #showFormField()
@@ -175,11 +181,9 @@ classDiagram
         #showContent()
     }
 
-
     class ProductActionsDoc{
         #showActionButton()
     }
-
 
     class WebshopDoc{
         +_construct(myData)
@@ -202,3 +206,5 @@ classDiagram
         -showProduct()
     }
 
+    class Logger{
+    + (static) logError()
