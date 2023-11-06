@@ -9,6 +9,7 @@ classDiagram
 
     BasicDoc <|-- HomeDoc
     BasicDoc <|-- AboutDoc
+    BasicDoc <|-- NotFoundDoc
     BasicDoc <|-- FormDoc
 
     FormDoc <|-- ContactDoc
@@ -37,102 +38,113 @@ classDiagram
 
     class PageModel{
     +page
-    #isPost
+    +isPost
     +menu
     +errors
     +genericErr
+    +genericMessage
     #sessionManager
 
-    __construct($copy)
+    +__construct($copy)
     +getRequestedPage()
-    #setPage()
-    #getUrlVar
+    +setPage()
     +createMenu()
-    +isLoggedin()
     }
 
+
     class UserModel{
-    #salutation
+    +salutation
     +name
     +email    
     +password
-    #repeatedPassword
-    #phonenumber
-    #comm_preference
-    #message
-    -userId
-    +valid
+    +repeatedPassword
+    +phonenumber
+    +comm_preference
+    +message
 
-    #salutationErr
-    #nameErr
-    #emailErr
-    #passwordErr
-    #genericErr
-    #phonenumberErr
-    #comm_preferenceErr
-    #messageErr
+    +userId
+    +valid
+    +userName
+
+    +salutationErr
+    +nameErr
+    +emailErr
+    +passwordErr
+    +genericErr
+    +phonenumberErr
+    +comm_preferenceErr
+    +messageErr
     
-    __construct($pageModel)
+    +__construct($pageModel)
     +validateLogin()
+    +registerUser()
+    +validateContact
+    -authenticateUser()
     +doLoginUser()
-    +doLogoutUser()
-    +authenticateUser()
 
     }
 
     class ShopModel{
-    #products
-    #product
-    #productLine
-    #subTotal
-    #image_url
-    #name
-    #pricetag
-    #id
-    #amount
-    #cart
+    +products
+    +product
+    +productLines
+    +total
+    +image_url
+    +name
+    +pricetag
+    +id
+    +amount
+    +cart
 
-    __construct()
-    #initializeWebshopData()
-    #getWebshopData()
-    #initializeShoppingcartData()
-    #getShoppingcartData()
-    #getCart()
+    +__construct()
+    +getProductData()
+    +getShoppingcartData()
+    +handleActions()
+    +completeOrder()
+    -getOrderlineData()
     
     }
 
     class HtmlDoc{
-       +show()
        -showHtmlStart()
-       -showHeaderStart()
-       #showHeaderContent()
-       -showHeaderEnd()
+       -showHeadStart()
+       #showHeadContent()
+       -showHeadEnd()
        -showBodyStart()
        #showBodyContent()
        -showBodyEnd()
        -showHtmlEnd()
+        +show()
     }
 
     class BasicDoc{
-        #model
-        #controller
         #data 
-        +__construct(mydata)
-        #showHeaderContent()
+
+        +__construct(myData)
+        #showHeadContent()
         -showTitle()
         -showCssLinks()
         #showBodyContent()
         -showHeader()
         -showMenu()
+        -showMenuItem()
         #showContent()
         -showFooter()
+        -showGenericError()
+        -showGenericMessage()
     }
+
     class HomeDoc{
         #showHeaderContent()
         #showContent()
     }
 
     class AboutDoc{
+        #showHeaderContent()
+        #showContent()
+    }
+
+    class NotFoundDoc{
         #showHeaderContent()
         #showContent()
     }
@@ -144,48 +156,107 @@ classDiagram
     }
 
     class ContactDoc{
-        #data 
+        +data
+
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
+        -showContactForm()
+        -showContactThanks()
     }
 
     class LoginDoc{
-        #data 
-        #showHeaderContent()
-        #showContent()
-    }
-    class RegisterDoc{
-        #data 
+        +data 
+
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
     }
 
+    class RegisterDoc{
+        +data 
+
+        +_construct(myData)
+        #showHeaderContent()
+        #showContent()
+    }
 
     class ProductActionsDoc{
         #showActionButton()
-        #showFormStart()
-        #showFormField()
     }
 
-
     class WebshopDoc{
-        #data      
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
         -showProductCard()
     }
 
     class ShoppingcartDoc{
-        #data 
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
         -showProductLine()
     }
 
     class ProductDoc{
-        #data 
+        +_construct(myData)
         #showHeaderContent()
         #showContent()
         -showProduct()
+    }
+
+    class Logger{
+    + (static) logError()
+    }
+
+    class MenuItem{
+    +linkValue
+    +buttontext
+
+    + __construct()
+    }
+
+    class SessionManager{
+    + __construct()
+    +doLoginUser()
+    +isUserLoggedIn()
+    +getLoggedInUserName()
+    +doLogOut()
+    +getCart()
+    +initializeCart()
+    +addToCart()
+    +removeFromCart()
+    }
+
+    class UserService{
+    + (static) authenticateUser()
+    + (static) doesEmailExist()
+    }
+
+    class Util{
+    + (static) getPostVar()
+    + (static) getUrlVar()
+    + (static) getArrayVar()
+    }
+
+    class Validators{
+    + (static) tets_input()
+    + (static) collectRequiredField()
+    + (static) collectAndValidateEmail()
+    + (static) collectAndValidateName()
+    + (static) validateLogin()
+    + (static) validateRegister()
+    + (static) validateContact()
+    }
+
+    class DatabaseConnection{
+    - (static) connectToDatabase()
+    + (static) findUserByEmail()
+    + (static) saveUser()
+    + (static) getProductsFromDatabase()
+    + (static) findProductById()
+    + (static) writeOrderToDatabase()
+    + (static) writeOrderlinesToDatabase()    
     }
 
