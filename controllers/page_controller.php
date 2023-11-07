@@ -5,11 +5,17 @@ class PageController
 {
     //hier zit het object pagemodel in
     private $model;
+    private $modelFactory;
+    private $pageModel;
 
 
-    public function __construct()
+    public function __construct(ModelFactory $modelFactory)
     {
         $this->model = new PageModel(NULL);
+        $this->modelFactory = $modelFactory;
+
+        $this->pageModel = $modelFactory->createModel("Page");
+        //Ik laat hier een PageModel creeren door de Modelfactory (createmodel)
     }
 
     public function handleRequest()

@@ -24,13 +24,15 @@ class UserModel extends PageModel
     public $valid = false;
     public $userName;
     public $userId;
+    public $userCrud;
 
 
-    public function __construct($pageModel)
+    public function __construct($pageModel, UserCrud $userCrud)
     {
         PARENT::__construct($pageModel);
         //volgens mij roep ik hier de constructor van pagemodel (parent) aan. 
         // de input geef ik mee als ik een nieuwe instantie maak van usermodel. 
+        $this->userCrud = $userCrud;
     }
 
     public function validateLogin()
