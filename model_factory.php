@@ -1,10 +1,14 @@
 <?php
 
+require_once("models/user_model.php");
+require_once("models/shop_model.php");
+require_once("models/page_model.php");
+
 class ModelFactory
 {
 
     public $crudFactory;
-    private $lastModel = NULL;
+    private $lastModel = null;
 
     // hier zit het laatst gemaakte model in
 
@@ -18,11 +22,10 @@ class ModelFactory
         // als name is niet page, maak dan een crud aan
         if ($name != "Page") {
             $crud = $this->crudFactory->createCrud($name);
+            $model = new ($name . "Model")($this->lastModel, $crud);
         } else {
-            $crud = null;
+            $model = new ($name . "Model")(null);
         }
-
-        $model = new ($name . "Model")($this->lastModel, $crud);
 
         $this->lastModel = $model;
 

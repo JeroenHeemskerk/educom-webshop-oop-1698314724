@@ -5,7 +5,6 @@ class PageModel
     public $page;
     public $isPost;
     public $menu = [];
-    // menu = assoc array
     public $errors = [];
     public $genericErr = "";
     public $genericMessage = "";

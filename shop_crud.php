@@ -12,8 +12,6 @@ class ShopCrud
 
     public function createOrder($userId, $total)
     {
-        // writeOrderToDatabase($userId, $total)
-
         $sql = "INSERT INTO orders (user_id, total_amount) VALUES (:user_id, :total_amount)";
         $params = ["user_id" => $userId, "total_amount" => $total];
 
@@ -23,18 +21,13 @@ class ShopCrud
 
     public function readAllProducts($productIds = [])
     {
-        //getProductsFromDatabase($productIds = []) 
-        // Deze functie klopt nog niet // ??
-        //prepared statements?
-
         $sql = 'SELECT * FROM products';
+        $params = [];
 
         if (!empty($productIds)) {
-            $productIdsAsString = implode(",", $productIds);
-            $sql = $sql . ' WHERE id IN (' . $productIdsAsString . ')';
+            $sql = $sql . ' WHERE id IN (' . trim(str_repeat(', ?', count($productIds)), ', ') . ')';
+            $params = $productIds;
         }
-
-        $params = ["productIds" => $productIds];
 
         return $this->crud->readMultipleRows($sql, $params);
     }
@@ -42,8 +35,6 @@ class ShopCrud
 
     public function readProductById($id)
     {
-        // findProductById($id)
-
         $sql = "SELECT * FROM products WHERE id = :id";
         $params = ["id" => $id];
 
@@ -51,14 +42,15 @@ class ShopCrud
     }
 
 
-    public function createOrderlines($orderlineValuesString)
+    public function createOrderlines($orderlineValues)
     {
-        // writeOrderlinesToDatabase($orderlineValuesString)
-        // prepared statements?
+        $count = count($orderlineValues) / 3;
+        $rowPlaces = '(' . implode(', ', array_fill(0, 3, '?')) . ')';
+        $allPlaces = implode(', ', array_fill(0, $count, $rowPlaces));
 
         $sql = "INSERT INTO orderlines (order_id, product_id, product_quantity) 
-            VALUES (:orderlineValuesString)";
-        $params = ["orderlinesValuesString" => $orderlineValuesString];
+            VALUES $allPlaces";
+        $params = $orderlineValues;
 
         return $this->crud->createRow($sql, $params);
     }

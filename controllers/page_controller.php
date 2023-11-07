@@ -3,21 +3,13 @@
 require_once('models/page_model.php');
 class PageController
 {
-    //hier zit het object pagemodel in
     private $model;
     private $modelFactory;
-    private $pageModel;
-    public $crud;
-
 
     public function __construct(ModelFactory $modelFactory)
     {
-        $this->model = new PageModel(NULL);
         $this->modelFactory = $modelFactory;
-
-        $this->pageModel = $modelFactory->createModel("Page");
-
-        //Ik laat hier een PageModel creeren door de Modelfactory (createmodel)
+        $this->model = $modelFactory->createModel("Page");
     }
 
     public function handleRequest()
@@ -30,8 +22,6 @@ class PageController
     //from client (user)
     private function getRequest()
     {
-        //deze functie ga ik dus uit PageModel halen
-        // in model zit een instantie van pagemodel (object)
         $this->model->getRequestedPage();
     }
 
@@ -40,10 +30,7 @@ class PageController
     {
         switch ($this->model->page) {
             case 'login':
-                require_once('models/user_model.php');
                 $this->model = $this->modelFactory->createModel("User");
-                // ik ga hier nu aan de ModelFactory vragen om een model met naam "User"
-                // $this->model = new UserModel($this->model);
                 if ($this->model->isPost) {
                     $this->model->validateLogin();
                     if ($this->model->valid) {
@@ -53,9 +40,7 @@ class PageController
                 }
                 break;
             case 'register':
-                require_once('models/user_model.php');
                 $this->model = $this->modelFactory->createModel("User");
-                // $this->model = new UserModel($this->model);
                 if ($this->model->isPost) {
                     $this->model->registerUser();
                     if ($this->model->valid) {
@@ -64,9 +49,7 @@ class PageController
                 }
                 break;
             case 'contact':
-                require_once('models/user_model.php');
                 $this->model = $this->modelFactory->createModel("User");
-                // $this->model = new UserModel($this->model);
                 if ($this->model->isPost) {
                     $this->model->validateContact();
                 }
@@ -74,28 +57,23 @@ class PageController
             case 'webshop':
                 require_once('models/shop_model.php');
                 $this->model = $this->modelFactory->createModel("Shop");
-                // ik ga hier nu aan de ModelFactory vragen om een model met naam "Shop"
-                // $this->model = new ShopModel($this->model);
                 $this->model->handleActions();
                 $this->model->getWebshopData();
                 break;
             case 'product':
                 require_once('models/shop_model.php');
                 $this->model = $this->modelFactory->createModel("Shop");
-                // $this->model = new ShopModel($this->model);
                 $this->model->handleActions();
                 $this->model->getProductData();
                 break;
             case 'shoppingcart':
                 require_once('models/shop_model.php');
                 $this->model = $this->modelFactory->createModel("Shop");
-                // $this->model = new ShopModel($this->model);
                 $this->model->handleActions();
                 $this->model->getShoppingcartData();
                 break;
             case 'logout':
-                require_once('models/user_model.php');
-                $this->model = new UserModel($this->model);
+                $this->model = $this->modelFactory->createModel("User");
                 $this->model->sessionManager->doLogOut();
                 $this->model->setPage("home");
                 break;
@@ -145,6 +123,7 @@ class PageController
                 require_once('views/not_found_doc.php');
                 $view = new NotFoundDoc($this->model);
         }
+
         $view->show();
     }
 }

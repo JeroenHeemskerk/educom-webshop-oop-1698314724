@@ -32,15 +32,15 @@ class WebshopDoc extends ProductActionsDoc
 
         echo
         "<div class='card text-center card-outer-container' style='width: 50rem'>
-            <a href='index.php?page=product&id=" . $product['id'] . "'>
+            <a href='index.php?page=product&id=" . $product->id . "'>
                 <div class='card-inner-container'>
-                    <img class='card-img' src='" . $product['image_url'] . "' alt='soap image'></br>
+                    <img class='card-img' src='" . $product->image_url . "' alt='soap image'></br>
                     <div class ='product-text card-body'>
-                        <h4 class = 'card-title'>" . $product['name'] . "</h4>
-                        <p class = 'card-text'> " . $product['description'] . "</p>
-                        <span>&euro;" . number_format(($product['pricetag'] / 100), 2, ',') . "</span>";
+                        <h4 class = 'card-title'>" . $product->name . "</h4>
+                        <p class = 'card-text'> " . $product->description . "</p>
+                        <span>&euro;" . number_format(($product->pricetag / 100), 2, ',') . "</span>";
         if ($userIsLoggedIn) {
-            $this->showActionButton('webshop', 'add to cart', 'addToCart', $product["id"]);
+            $this->showActionButton('webshop', 'add to cart', 'addToCart', $product->id);
         }
         echo "
                     </div>

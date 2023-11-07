@@ -4,3 +4,8 @@ authentication failed: Access denied for user 'laura_web_shop_user'@'localhost' 
 authentication failed: Unknown database 'lauras_webshopz'
 authentication failed: php_network_getaddresses: getaddrinfo for localhosty failed: Host is onbekend. 
 authentication failed: Access denied for user 'laura_web_shop_userz'@'localhost' (using password: YES)
+getting products failed: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+getting products failed: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+order failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+order failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+order failed: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens

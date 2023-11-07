@@ -23,12 +23,12 @@ class ProductDoc extends ProductActionsDoc
 
     private function showProduct($product)
     {
-        echo "<div class='card-body'> <img class = 'product-img' src='" . $product['image_url'] . "' alt='soap image' width='400' height='300'></br>
-    <h4 class = 'card-title'>" . $product["name"] . "</h4></br>
-    <p class = 'card-text'>" . $product["description"] . "</p></br>
-    &#8364;" . number_format(($product['pricetag'] / 100), 2, ',') . "</br> </div>";
+        echo "<div class='card-body'> <img class = 'product-img' src='" . $product->image_url . "' alt='soap image' width='400' height='300'></br>
+    <h4 class = 'card-title'>" . $product->name . "</h4></br>
+    <p class = 'card-text'>" . $product->description . "</p></br>
+    &#8364;" . number_format(($product->pricetag / 100), 2, ',') . "</br> </div>";
         if ($this->data->sessionManager->isUserLoggedIn()) {
-            $this->showActionButton('product', 'add to cart', 'addToCart', $product["id"]);
+            $this->showActionButton('product', 'add to cart', 'addToCart', $product->id);
         }
     }
 }

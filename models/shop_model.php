@@ -25,17 +25,13 @@ class ShopModel extends PageModel
 
     public function getWebshopData()
     {
-        require_once('database-connection.php');
         try {
-
-            $this->products = DatabaseConnection::getProductsFromDatabase();
+            $this->products = $this->shopCrud->readAllProducts();
         } catch (Exception $e) {
             require_once("logger.php");
             Logger::logError("getting products failed: " . $e->getMessage());
             $this->genericErr = "Er is een technisch probleem. Probeer het later nog eens.";
         }
-
-        // return?
     }
 
     public function getProductData()
@@ -51,10 +47,7 @@ class ShopModel extends PageModel
         }
 
         try {
-            require_once("database-connection.php");
-            $this->product = DatabaseConnection::findProductById($this->id);
-            //in this->product zit nu een assoc array
-
+            $this->product = $this->shopCrud->readProductById($this->id);
         } catch (Exception $e) {
             require_once("logger.php");
             Logger::logError("getting product failed: " . $e->getMessage());
@@ -68,19 +61,16 @@ class ShopModel extends PageModel
         try {
             $cart = $this->sessionManager->getCart();
             $productIds = array_keys($cart);
-            require_once("database-connection.php");
-            $this->products = DatabaseConnection::getProductsFromDatabase($productIds);
-            //this->products is nu een array(products) met daarin arrays(product)
+            $this->products = $this->shopCrud->readAllProducts($productIds);
 
             foreach ($cart as $productId => $amount) {
                 // zoek naar de juiste index voor dit product
                 $column = array_column($this->products, 'id');
                 $index = array_search($productId, $column);
-
                 $product = $this->products[$index];
-                $subTotal = $amount * $product['pricetag'];
+                $subTotal = $amount * $product->pricetag;
                 $this->total += $subTotal;
-                array_push($this->productLines, ['id' => $product['id'], 'name' => $product['name'], 'amount' => $amount, 'subTotal' => $subTotal, 'pricetag' => $product['pricetag'], 'image_url' => $product['image_url']]);
+                array_push($this->productLines, ['id' => $product->id, 'name' => $product->name, 'amount' => $amount, 'subTotal' => $subTotal, 'pricetag' => $product->pricetag, 'image_url' => $product->image_url]);
             }
         } catch (Exception $e) {
             require_once("logger.php");
@@ -106,7 +96,6 @@ class ShopModel extends PageModel
                 $this->genericMessage = "Removed item from your shopping cart!";
                 break;
             case "completeOrder":
-                require_once("database-connection.php");
                 $userId = $this->sessionManager->getLoggedInUserId();
                 try {
                     $this->completeOrder($userId);
@@ -128,8 +117,8 @@ class ShopModel extends PageModel
         //total is hier in centen opgeslagen
         $total = 0;
         $productIds = array_keys($cart);
-        require_once("database-connection.php");
-        $products = DatabaseConnection::getProductsFromDatabase($productIds);
+
+        $products = $this->shopCrud->readAllProducts($productIds);
         $orderLines = [];
 
         foreach ($cart as $productId => $amount) {
@@ -138,15 +127,15 @@ class ShopModel extends PageModel
             $index = array_search($productId, $column);
 
             $product = $products[$index];
-            $total += $amount * $product['pricetag'];
-            array_push($orderLines, ['id' => $product['id'], 'amount' => $amount]);
+            $total += $amount * $product->pricetag;
+            array_push($orderLines, ['id' => $product->id, 'amount' => $amount]);
         }
 
-        $orderId = DatabaseConnection::writeOrderToDatabase($userId, $total);
+        $orderId = $this->shopCrud->createOrder($userId, $total);
         // in orderId zit nu de Id van de order!
         $orderlineData = $this->getOrderlineData($orderId, $orderLines);
 
-        DatabaseConnection::writeOrderlinesToDatabase($orderlineData);
+        $this->shopCrud->createOrderlines($orderlineData);
         $this->sessionManager->initializeCart();
         $this->genericMessage = "Bedankt voor je bestelling!";
     }
@@ -154,16 +143,14 @@ class ShopModel extends PageModel
     private function getOrderlineData($orderId, $cart)
     {
         // in orderline moet zitten: order_id, product_id, product quantity. 
-        $orderlineValueArray = [];
+        $orderlineValuesArray = [];
 
         foreach ($cart as $productline) {
-            $orderline = "($orderId, " . $productline['id'] . ", " . $productline['amount'] . " )";
-
-            array_push($orderlineValueArray, $orderline);
+            array_push($orderlineValuesArray, $orderId);
+            array_push($orderlineValuesArray, $productline['id']);
+            array_push($orderlineValuesArray, $productline['amount']);
         }
 
-        $orderlineValuesString = implode(',', $orderlineValueArray);
-
-        return $orderlineValuesString;
+        return $orderlineValuesArray;
     }
 }

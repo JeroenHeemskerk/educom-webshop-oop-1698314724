@@ -68,14 +68,12 @@ class Validators
             }
         }
 
-        require_once("user-service.php");
-        if (!empty($userModel->email) && UserService::doesEmailExist(Util::getPostVar('email'))) {
+        if (!empty($userModel->email) && $userModel->doesEmailExist(Util::getPostVar('email'))) {
             $userModel->emailErr = "*User with this email already exists in database.";
         }
 
         $userModel->valid = empty($userModel->nameErr) && empty($userModel->emailErr) && empty($userModel->passwordErr) && empty($userModel->repeatedPasswordErr);
     }
-
 
 
     public static function validateContact($userModel)
