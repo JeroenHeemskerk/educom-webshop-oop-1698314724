@@ -3,6 +3,7 @@
 require_once('controllers/page_controller.php');
 require_once('model_factory.php');
 require_once('crud.php');
+require_once('crud_factory.php');
 
 $crud = new Crud();
 $crudFactory = new CrudFactory($crud);

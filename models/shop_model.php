@@ -2,7 +2,6 @@
 
 class ShopModel extends PageModel
 {
-
     public $products = [];
     public $product;
     public $productLines = [];
@@ -14,10 +13,14 @@ class ShopModel extends PageModel
     public $amount;
     public $cart;
 
+    public $shopCrud;
 
-    public function __construct($pageModel)
+
+    public function __construct($pageModel, ShopCrud $shopCrud)
     {
         PARENT::__construct($pageModel);
+
+        $this->shopCrud = $shopCrud;
     }
 
     public function getWebshopData()

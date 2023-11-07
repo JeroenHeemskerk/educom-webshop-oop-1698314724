@@ -7,6 +7,7 @@ class PageController
     private $model;
     private $modelFactory;
     private $pageModel;
+    public $crud;
 
 
     public function __construct(ModelFactory $modelFactory)
@@ -15,6 +16,7 @@ class PageController
         $this->modelFactory = $modelFactory;
 
         $this->pageModel = $modelFactory->createModel("Page");
+
         //Ik laat hier een PageModel creeren door de Modelfactory (createmodel)
     }
 
@@ -39,7 +41,9 @@ class PageController
         switch ($this->model->page) {
             case 'login':
                 require_once('models/user_model.php');
-                $this->model = new UserModel($this->model);
+                $this->model = $this->modelFactory->createModel("User");
+                // ik ga hier nu aan de ModelFactory vragen om een model met naam "User"
+                // $this->model = new UserModel($this->model);
                 if ($this->model->isPost) {
                     $this->model->validateLogin();
                     if ($this->model->valid) {
@@ -50,7 +54,8 @@ class PageController
                 break;
             case 'register':
                 require_once('models/user_model.php');
-                $this->model = new UserModel($this->model);
+                $this->model = $this->modelFactory->createModel("User");
+                // $this->model = new UserModel($this->model);
                 if ($this->model->isPost) {
                     $this->model->registerUser();
                     if ($this->model->valid) {
@@ -60,26 +65,31 @@ class PageController
                 break;
             case 'contact':
                 require_once('models/user_model.php');
-                $this->model = new UserModel($this->model);
+                $this->model = $this->modelFactory->createModel("User");
+                // $this->model = new UserModel($this->model);
                 if ($this->model->isPost) {
                     $this->model->validateContact();
                 }
                 break;
             case 'webshop':
                 require_once('models/shop_model.php');
-                $this->model = new ShopModel($this->model);
+                $this->model = $this->modelFactory->createModel("Shop");
+                // ik ga hier nu aan de ModelFactory vragen om een model met naam "Shop"
+                // $this->model = new ShopModel($this->model);
                 $this->model->handleActions();
                 $this->model->getWebshopData();
                 break;
             case 'product':
                 require_once('models/shop_model.php');
-                $this->model = new ShopModel($this->model);
+                $this->model = $this->modelFactory->createModel("Shop");
+                // $this->model = new ShopModel($this->model);
                 $this->model->handleActions();
                 $this->model->getProductData();
                 break;
             case 'shoppingcart':
                 require_once('models/shop_model.php');
-                $this->model = new ShopModel($this->model);
+                $this->model = $this->modelFactory->createModel("Shop");
+                // $this->model = new ShopModel($this->model);
                 $this->model->handleActions();
                 $this->model->getShoppingcartData();
                 break;

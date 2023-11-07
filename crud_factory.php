@@ -1,5 +1,7 @@
 <?php
 
+require_once("user_crud.php");
+
 class CrudFactory
 {
     public $crud;
@@ -15,5 +17,6 @@ class CrudFactory
     {
         // Create new crud
         $this->newCrud = new ($name . "Crud")($this->crud);
+        // hier staat nu schijnbaar 'PageCrud'
     }
 }
