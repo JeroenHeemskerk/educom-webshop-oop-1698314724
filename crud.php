@@ -1,58 +1,10 @@
 <?php
 
-
-// maak van de my_sql een PDO variant
-// 
-
-// PDO stijl (PHP Data objects)
-// $servername = "localhost";
-// $username = "username";
-// $password = "password";
-// $dbname = "myDBPDO";
-
-// try {
-//   $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-//   // set the PDO error mode to exception
-//   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//   $sql = "INSERT INTO MyGuests (firstname, lastname, email)
-//   VALUES ('John', 'Doe', 'john@example.com')";
-//   // use exec() because no results are returned
-//   $conn->exec($sql);
-//   echo "New record created successfully";
-// } catch(PDOException $e) {
-//   echo $sql . "<br>" . $e->getMessage();
-// }
-
-// $conn = null;
-// 
-
-
-// class Crud
-// {
-//     //deze crud klasse moet generiek worden
-
-//     public function __construct()
-//     {
-//         $servername = 'localhost';
-//         $username = 'laura_web_shop_user';
-//         $password = 'ditiseenwachtwoord';
-//         $dbname = 'lauras_webshop';
-
-//         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-
-//         // dit is volgens mij nog zonder prepared statements, moet nog komen
-//         // globaal configureren om objecten terug te geven
-
-//         $sql = "INSERT INTO users (firstname, lastname, email)
-//         VALUES ('John', 'Doe', 'john@example.com')";
-//         $conn->exec($sql);
-//     }
-// }
-
-
 class Crud
 {
     private $pdo;
+    // Ik stop hier via de constructor een instantie van het PDO object in met mijn server-data als input.
+    //Ik kan nu in de rest van de class gebruik maken van PDO object.
 
     public function __construct()
     {
@@ -64,10 +16,14 @@ class Crud
         $this->pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     }
 
+    // hier komen de generieke database functies
     public function createRow($sql, $params)
     {
-        $stmt = $this->pdo->prepare($sql);
-        $success = $stmt->execute($params);
+        //sql moet hier dus input worden
+        $statement = $this->pdo->prepare($sql);
+        // //ik haal de method prepare uit het PDO object
+        // $statement->setFetchMode(PDO::FETCH_OBJ);
+        $success = $statement->execute($params);
 
         if ($success) {
             // Return the last inserted ID
@@ -79,38 +35,40 @@ class Crud
 
     public function readOneRow($sql, $params, $className = null)
     {
-        $stmt = $this->pdo->prepare($sql);
+        $statement = $this->pdo->prepare($sql);
         // foreach ($params as $key => $value) {
-        //     $stmt->bindValue($key, $value);
+        //     $statement->bindValue($key, $value);
         // }
-        $stmt->execute($params);
+        $statement->execute($params);
 
         if ($className) {
-            return $stmt->fetchObject($className);
+            return $statement->fetchObject($className);
         } else {
-            return $stmt->fetch(PDO::FETCH_OBJ);
+            return $statement->fetch(PDO::FETCH_OBJ);
         }
     }
 
     public function readMultipleRows($sql, $params, $className = null)
     {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params);
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute($params);
 
         if ($className) {
-            return $stmt->fetchAll(PDO::FETCH_CLASS, $className);
+            return $statement->fetchAll(PDO::FETCH_CLASS, $className);
         } else {
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $statement->fetchAll(PDO::FETCH_OBJ);
         }
     }
 
-    // public function updateRow($sql, $params) {
-    //     $stmt = $this->pdo->prepare($sql);
-    //     return $stmt->execute($params);
-    // }
+    public function updateRow($sql, $params)
+    {
+        $statement = $this->pdo->prepare($sql);
+        return $statement->execute($params);
+    }
 
-    // public function deleteRow($sql, $params) {
-    //     $stmt = $this->pdo->prepare($sql);
-    //     return $stmt->execute($params);
-    // }
+    public function deleteRow($sql, $params)
+    {
+        $statement = $this->pdo->prepare($sql);
+        return $statement->execute($params);
+    }
 }

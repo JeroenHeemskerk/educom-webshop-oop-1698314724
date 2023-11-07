@@ -9,6 +9,10 @@ class UserCrud
         $this->crud = $crud;
     }
 
+    public function createUser()
+    {
+    }
+
     public function readUserByEmail($email)
     {
 
@@ -16,5 +20,13 @@ class UserCrud
         $params = ["email" => $email];
 
         return $this->crud->readOneRow($sql, $params);
+    }
+
+    public function updateUser()
+    {
+    }
+
+    public function deleteUser()
+    {
     }
 }
