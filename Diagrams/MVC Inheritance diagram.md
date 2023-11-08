@@ -4,7 +4,10 @@ title: MVC Inheritance Diagram - Webshop
 ---
 classDiagram
     note "+ = public, - = private, # = protected"
-    %% A <|-- B means that class B inherits from class A %%
+    %% A --|> B means that class A inherits from class B %%
+    %% A ..|> B means that class A creates class B %%
+    %% A ..> B means that class A depends on class B %%
+    %% a static class of method ends with an $ %%
     HtmlDoc <|-- BasicDoc
 
     BasicDoc <|-- HomeDoc
@@ -21,11 +24,35 @@ classDiagram
     ProductActionsDoc  <|-- ProductDoc
     ProductActionsDoc  <|-- ShoppingcartDoc
 
-    PageModel <|-- UserModel
-    Pagemodel <|-- ShopModel
+    PageModel <|-- UserModel 
+    PageModel <|-- ShopModel
+    PageModel ..> SessionManager
+    PageModel ..> MenuItem
+    PageModel ..> Util
+    PageModel ..> Logger
 
+    UserModel ..> Validators
+    Validators ..> UserService
+    UserService ..> DatabaseConnection
+    ShopModel ..> Validators
+    ShopModel ..> DatabaseConnection
 
-    class PageController(){
+    PageController ..|> PageModel
+    PageController ..|> UserModel
+    PageController ..|> ShopModel
+
+    PageController ..|> HomeDoc
+    PageController ..|> AboutDoc
+    PageController ..|> NotFoundDoc
+    PageController ..|> FormDoc
+    PageController ..|> ContactDoc
+    PageController ..|> LoginDoc
+    PageController ..|> RegisterDoc
+    PageController ..|> WebshopDoc
+    PageController ..|> ProductDoc
+    PageController ..|> ShoppingcartDoc
+
+    class PageController{
     -model
 
     +__construct()
@@ -34,7 +61,6 @@ classDiagram
     -processRequest()
     -showResponse()
     }
-
 
     class PageModel{
     +page
@@ -156,7 +182,6 @@ classDiagram
     }
 
     class ContactDoc{
-        +data
 
         +_construct(myData)
         #showHeaderContent()
@@ -166,7 +191,6 @@ classDiagram
     }
 
     class LoginDoc{
-        +data 
 
         +_construct(myData)
         #showHeaderContent()
@@ -174,7 +198,6 @@ classDiagram
     }
 
     class RegisterDoc{
-        +data 
 
         +_construct(myData)
         #showHeaderContent()
@@ -230,33 +253,33 @@ classDiagram
     }
 
     class UserService{
-    + (static) authenticateUser()
-    + (static) doesEmailExist()
+    +authenticateUser()$
+    +doesEmailExist()$
     }
 
     class Util{
-    + (static) getPostVar()
-    + (static) getUrlVar()
-    + (static) getArrayVar()
+    + getPostVar()$
+    + getUrlVar()$
+    + getArrayVar()$
     }
 
     class Validators{
-    + (static) tets_input()
-    + (static) collectRequiredField()
-    + (static) collectAndValidateEmail()
-    + (static) collectAndValidateName()
-    + (static) validateLogin()
-    + (static) validateRegister()
-    + (static) validateContact()
+    + tets_input()$
+    + collectRequiredField()$
+    + collectAndValidateEmail()$
+    + collectAndValidateName()$
+    + validateLogin()$
+    + validateRegister()$
+    + validateContact()$
     }
 
     class DatabaseConnection{
-    - (static) connectToDatabase()
-    + (static) findUserByEmail()
-    + (static) saveUser()
-    + (static) getProductsFromDatabase()
-    + (static) findProductById()
-    + (static) writeOrderToDatabase()
-    + (static) writeOrderlinesToDatabase()    
+    - connectToDatabase()$
+    + findUserByEmail()$
+    + saveUser()$
+    + getProductsFromDatabase()$
+    + findProductById()$
+    + writeOrderToDatabase()$
+    + writeOrderlinesToDatabase()$    
     }
-
+```
