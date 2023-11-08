@@ -3,8 +3,8 @@
 class Crud
 {
     private $pdo;
-    // Ik stop hier via de constructor een instantie van het PDO object in met mijn server-data als input.
-    //Ik kan nu in de rest van de class gebruik maken van PDO object.
+    //Ik stop hier via de constructor een instantie van het PDO object in.
+    //Ik kan nu in de rest van de class gebruik maken van het PDO object.
 
     public function __construct()
     {
@@ -16,12 +16,10 @@ class Crud
         $this->pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     }
 
-    // hier komen de generieke database functies
+    //generieke database functies
     public function createRow($sql, $params)
     {
-        //sql moet hier dus input worden
         $statement = $this->pdo->prepare($sql);
-        // //ik haal de method prepare uit het PDO object
         // $statement->setFetchMode(PDO::FETCH_OBJ);
         $success = $statement->execute($params);
 

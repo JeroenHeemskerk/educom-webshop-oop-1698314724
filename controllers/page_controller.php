@@ -10,6 +10,7 @@ class PageController
     {
         $this->modelFactory = $modelFactory;
         $this->model = $modelFactory->createModel("Page");
+        // hier heb ik nu beschikking over het juiste model.
     }
 
     public function handleRequest()

@@ -20,6 +20,7 @@ class ModelFactory
     public function createModel($name)
     {
         // als name is niet page, maak dan een crud aan
+        // want ik heb geen 'pagecrud.'
         if ($name != "Page") {
             $crud = $this->crudFactory->createCrud($name);
             $model = new ($name . "Model")($this->lastModel, $crud);
@@ -30,6 +31,7 @@ class ModelFactory
         $this->lastModel = $model;
 
         return $model;
+        // de inhoud van deze return gaat terug in $model in de pagecontroller.
     }
 
     public function getLastModel()

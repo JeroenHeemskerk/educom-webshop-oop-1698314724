@@ -29,6 +29,7 @@ class ShopCrud
             $params = $productIds;
         }
 
+        // var_dump($sql);
         return $this->crud->readMultipleRows($sql, $params);
     }
 

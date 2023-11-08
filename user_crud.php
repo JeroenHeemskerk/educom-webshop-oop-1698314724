@@ -6,7 +6,6 @@ class UserCrud
 
     public function __construct(Crud $crud)
     {
-        //volgens mij is dit de jusite manier om de klasse Crud te injecteren
         $this->crud = $crud;
     }
 
@@ -22,7 +21,6 @@ class UserCrud
     public function readUserByEmail($email)
     {
         //findUserByEmail
-
         $sql = "SELECT * FROM users WHERE email = :email";
         $params = ["email" => $email];
 
@@ -32,8 +30,8 @@ class UserCrud
     public function updateUser($id, $email, $name, $password)
     {
         //updateRow
+        // deze functie gebruik ik nooit. Overbodig?
         $sql = "UPDATE users SET email= :email, name = :name, password = :password WHERE id= :id";
-        // moet dit via id?
         $params = ["id" => $id, "email" => $email, "name" => $name, "password" => $password];
 
         return $this->crud->updateRow($sql, $params);
@@ -42,8 +40,8 @@ class UserCrud
     public function deleteUser($id)
     {
         //deleteRow
+        // deze functie gebruik ik nooit. Overbodig?
         $sql = "SELECT * FROM users WHERE id = :id";
-        // moet dit via id?
         $params = ["id" => $id];
 
         return $this->crud->deleteRow($sql, $params);
