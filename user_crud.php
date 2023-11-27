@@ -31,6 +31,7 @@ class UserCrud
     {
         //updateRow
         // deze functie gebruik ik nooit. Overbodig?
+        // bij UPDATE nooit WHERE vergeten!
         $sql = "UPDATE users SET email= :email, name = :name, password = :password WHERE id= :id";
         $params = ["id" => $id, "email" => $email, "name" => $name, "password" => $password];
 
