@@ -22,7 +22,7 @@ class RatingCrud
 
     public function updateRating($userId, $productId, $newRating)
     {
-        $sql = "UPDATE ratings SET userId= :userId, productId= :productId, star_count= :star_count WHERE productId = :productId AND userId = :userId";
+        $sql = "UPDATE ratings SET star_count= :star_count WHERE product_id = :product_id AND user_id = :user_id";
         $params = ["user_id" => $userId, "product_id" => $productId, "star_count" => $newRating];
 
         return $this->crud->updateRow($sql, $params);
@@ -30,15 +30,14 @@ class RatingCrud
 
     public function averageRatingOneProduct($productId)
     {
-        $sql = "SELECT AVG(star_count) FROM ratings WHERE productId = :productId";
-        $params = ["productId" => $productId];
+        $sql = "SELECT AVG(star_count) FROM ratings WHERE product_id = :product_id";
+        $params = ["product_id" => $productId];
 
         return $this->crud->readOneRow($sql, $params);
     }
 
     public function averageRatingAllProducts()
     {
-
         $sql = "SELECT AVG(star_count) FROM ratings";
         $params = [];
 
