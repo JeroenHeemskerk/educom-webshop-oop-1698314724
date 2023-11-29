@@ -1,6 +1,6 @@
 
 function sayHi(string) {
-    alert(string)
+    //alert(string)
 }
 
 $(document).ready(function () {

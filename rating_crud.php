@@ -38,7 +38,7 @@ class RatingCrud
 
     public function averageRatingAllProducts()
     {
-        $sql = "SELECT AVG(star_count) FROM ratings";
+        $sql = "SELECT product_id, AVG(star_count) as rating FROM ratings GROUP BY product_id";
         $params = [];
 
         return $this->crud->readMultipleRows($sql, $params);

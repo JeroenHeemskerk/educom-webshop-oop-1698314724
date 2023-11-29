@@ -1,5 +1,5 @@
 <?php
-
+require_once('util.php');
 require_once('models/page_model.php');
 class PageController
 {
@@ -15,9 +15,17 @@ class PageController
 
     public function handleRequest()
     {
-        $this->getRequest();
-        $this->processRequest();
-        $this->showResponse();
+        $isAjaxRequest = Util::getUrlVar('action') == 'ajax';
+
+        if ($isAjaxRequest) {
+            require_once("ajax_controller.php");
+            $ajaxController = new AjaxController($this->modelFactory);
+            $ajaxController->handleRequest();
+        } else {
+            $this->getRequest();
+            $this->processRequest();
+            $this->showResponse();
+        }
     }
 
     //from client (user)

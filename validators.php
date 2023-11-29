@@ -2,6 +2,7 @@
 
 class Validators
 {
+    const ALLOWED_AJAX_FUNCTIONS = ['getAllRatings', 'updateRating'];
 
     public static function test_input($data)
     {
@@ -10,6 +11,18 @@ class Validators
         $data = htmlspecialchars($data);
         return $data;
     }
+
+
+    //====================================================================
+
+
+    public static function validateAjaxFunction($function)
+    {
+        return in_array($function, self::ALLOWED_AJAX_FUNCTIONS);
+        // bestaat function in toegestane lijst(array) met functienamen?
+    }
+
+    //====================================================================
 
     public static function collectRequiredField($userModel, $key, $label)
     {

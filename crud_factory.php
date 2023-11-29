@@ -2,6 +2,7 @@
 
 require_once("user_crud.php");
 require_once("shop_crud.php");
+require_once("rating_crud.php");
 
 class CrudFactory
 {

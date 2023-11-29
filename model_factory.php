@@ -3,6 +3,7 @@
 require_once("models/user_model.php");
 require_once("models/shop_model.php");
 require_once("models/page_model.php");
+require_once("models/ajax_model.php");
 
 class ModelFactory
 {
@@ -21,7 +22,10 @@ class ModelFactory
     {
         // als name is niet page, maak dan een crud aan
         // want ik heb geen 'pagecrud.'
-        if ($name != "Page") {
+        if ($name == "Ajax") {
+            $crud = $this->crudFactory->createCrud("rating");
+            $model = new AjaxModel($crud);
+        } else if ($name != "Page") {
             $crud = $this->crudFactory->createCrud($name);
             $model = new ($name . "Model")($this->lastModel, $crud);
         } else {

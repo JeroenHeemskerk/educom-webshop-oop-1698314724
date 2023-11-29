@@ -10,7 +10,6 @@ class PageModel
     public $genericMessage = "";
     public $sessionManager;
 
-
     public function __construct($copy)
     {
         //deze constructor functie gaat aangeroepen worden door user_model. 
