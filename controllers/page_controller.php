@@ -19,7 +19,7 @@ class PageController
 
         if ($isAjaxRequest) {
             require_once("ajax_controller.php");
-            $ajaxController = new AjaxController($this->modelFactory);
+            $ajaxController = new AjaxController($this->modelFactory, $this->model->sessionManager);
             $ajaxController->handleRequest();
         } else {
             $this->getRequest();

@@ -6,10 +6,12 @@ class AjaxController
     private $model;
     private $modelFactory;
 
-    public function __construct(ModelFactory $modelFactory)
+
+    public function __construct(ModelFactory $modelFactory, SessionManager $sessionManager)
     {
         $this->modelFactory = $modelFactory;
         $this->model = $this->modelFactory->createModel("Ajax");
+        $this->model->userId = $sessionManager->getLoggedInUserId();;
     }
 
     public function handleRequest()
@@ -28,9 +30,10 @@ class AjaxController
 
         require_once('validators.php');
         if (Validators::validateAjaxFunction($function)) {
-            //als functienaam toestaan is (en dus bestaat) dan:
+            // omdat mensen zelf vanalles in de adresbalk kunnen typen, moet ik het valideren
+            //als functienaam toegestaan is (en dus bestaat) dan:
             $this->model->function = $function;
-            // sla functienaam op in instantie van ajax_model
+            // sla functienaam op in instantie van ajax_model (in variabele $function)
         }
     }
 
@@ -38,6 +41,7 @@ class AjaxController
     {
         if (isset($this->model->function)) {
             $this->model->executeAjaxFunction();
+            //hier roep ik via ajax_model de juiste functie aan
         }
     }
 
@@ -47,11 +51,6 @@ class AjaxController
         $view = new AjaxDoc($this->model);
 
         $view->sendResponse();
+        // ik echo nu de juiste data in JSON notatie. 
     }
-
-
-    //welke CRUD functie ik moet uitvoeren ga ik ook uit de URL halen
-    // en ook de variabelen
-
-    // soms komt er een post body mee
 }

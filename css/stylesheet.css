@@ -116,3 +116,11 @@ a:link {
 .radio {
     margin-left: 10px;
 }
+
+.fa {
+    color: darkgray;
+}
+
+.checked {
+    color: rgb(235, 182, 67);
+}

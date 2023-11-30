@@ -10,3 +10,4 @@ order failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defin
 order failed: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
 order failed: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
 order failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+updating rating for product failed: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`lauras_webshop`.`ratings`, CONSTRAINT `FOREIGN_KEY_PRODUCTS` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`))

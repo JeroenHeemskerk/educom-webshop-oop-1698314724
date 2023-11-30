@@ -2,7 +2,7 @@
 
 class Validators
 {
-    const ALLOWED_AJAX_FUNCTIONS = ['getAllRatings', 'updateRating'];
+    const ALLOWED_AJAX_FUNCTIONS = ['getAllRatings', 'updateRating', 'getRatingById'];
 
     public static function test_input($data)
     {

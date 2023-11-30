@@ -30,7 +30,7 @@ class RatingCrud
 
     public function averageRatingOneProduct($productId)
     {
-        $sql = "SELECT AVG(star_count) FROM ratings WHERE product_id = :product_id";
+        $sql = "SELECT product_id, AVG(star_count) as rating FROM ratings WHERE product_id = :product_id";
         $params = ["product_id" => $productId];
 
         return $this->crud->readOneRow($sql, $params);
@@ -42,6 +42,15 @@ class RatingCrud
         $params = [];
 
         return $this->crud->readMultipleRows($sql, $params);
+    }
+
+    public function findRatingByProductAndUser($userId, $productId)
+    {
+        $sql = "SELECT star_count as rating FROM ratings WHERE product_id = :product_id AND user_id = :user_id";
+        $params = ["user_id" => $userId, "product_id" => $productId];
+
+        //als de rating nog niet bestaat, krijg ik 'false' terug.
+        return $this->crud->readOneRow($sql, $params);
     }
 }
 

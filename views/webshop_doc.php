@@ -36,8 +36,16 @@ class WebshopDoc extends ProductActionsDoc
                 <div class='card-inner-container'>
                     <img class='card-img' src='" . $product->image_url . "' alt='soap image'></br>
                     <div class ='product-text card-body'>
-                        <h4 class = 'card-title'>" . $product->name . "</h4>
-                        <p class = 'card-text'> " . $product->description . "</p>
+                        <h4 class = 'card-title'>" . $product->name . "</h4>";
+        echo
+        "<div><span class='fa fa-star' id='s1'></span>
+                <span class='fa fa-star' id='s2'></span>
+                <span class='fa fa-star' id='s3'></span>
+                <span class='fa fa-star' id='s4'></span>
+                <span class='fa fa-star' id='s5'></span>
+                </div>";
+        echo
+        "<p class = 'card-text'> " . $product->description . "</p>
                         <span>&euro;" . number_format(($product->pricetag / 100), 2, ',') . "</span>";
         if ($userIsLoggedIn) {
             $this->showActionButton('webshop', 'add to cart', 'addToCart', $product->id);
