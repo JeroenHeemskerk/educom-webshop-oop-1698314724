@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  webshop_db:
+    image: "mariadb"   # download and use the latest 'mariadb' image
+    environment:       # some environment constants
+      MARIADB_ROOT_PASSWORD: Hallo123!
+      MARIADB_DATABASE: lauras_webshop
+      MARIADB_USER: laura_web_shop_user
+      MARIADB_PASSWORD: ditiseenwachtwoord
+    ports:
+      - "3310:3306"    # Expose port 3306 inside the container as port 3310 on our machine
+    volumes:
+    - data:/var/lib/mysql                        # use /var/lib/mysql to store the data
+    - ./Database:/docker-entrypoint-initdb.d     # run all *.sql scripts from the ./Database folder as a starting point
+
+volumes:
+  data:

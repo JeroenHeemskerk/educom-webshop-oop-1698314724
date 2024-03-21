@@ -1,38 +1,58 @@
 
-function sayHi(string) {
-    //alert(string)
-}
+
+$document.onLoad = getAllRatings();
+
+// getAllRatings(){
+// call naar de server Ajax
+// }
 
 $(document).ready(function () {
     //.ready zorgt ervoor dat het document eerst helemaal geladen is. 
     // Daarna worden deze functies pas uitgevoerd
-    // $("#content").html("<h1>JQuery says Hi!</h1>")
-    // sayHi('hello')
+
+    showRatings()
+
+    function setRating() {
+        $(".fa-star").click(function () {
+
+            var userId = //iets
+            var productId = //iets
+            var rating = //iets
+            
+        })
+    }
+
+    function showRating() {
+        var productId = starGroup.data("product-id");
+        var url = "index.php?request=ajax&action=averageRatingByProduct&productId=" + productId;
+
+    }
+    function showRatings() {
+
+    }
+    function saveRating() {
+
+    }
 
     $("#s1").click(function () {
-        $("#s1").addClass("checked");
+        $(".fa-star").css("color", "darkgrey");
+        $("#s1").css("color", "rgb(235, 182, 67)");
     })
     $("#s2").click(function () {
-        $("#s1, #s2").addClass("checked");
+        $(".fa-star").css("color", "darkgrey");
+        $("#s1, #s2").css("color", "rgb(235, 182, 67)");
     })
     $("#s3").click(function () {
-        $("#s1, #s2, #s3").addClass("checked");
+        $(".fa-star").css("color", "darkgrey");
+        $("#s1, #s2, #s3").css("color", "rgb(235, 182, 67)");
     })
     $("#s4").click(function () {
-        $("#s1, #s2, #s3, #s4").addClass("checked");
+        $(".fa-star").css("color", "darkgrey");
+        $("#s1, #s2, #s3, #s4").css("color", "rgb(235, 182, 67)");
     })
     $("#s5").click(function () {
-        $("#s1, #s2, #s3, #s4, #s5").addClass("checked");
+        $(".fa-star").css("color", "darkgrey");
+        $("#s1, #s2, #s3, #s4, #s5").css("color", "rgb(235, 182, 67)");
     })
 });
 
-
-
-
-//ik denk dat ik later een click method (jquery) wil gaan toevoegen aan de sterren (dat worden buttons)
-// $("button").click(function(){
-//  doe iets
-//});
-
-
-// Hier jQuery gaan schrijven

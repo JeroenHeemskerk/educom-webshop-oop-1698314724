@@ -40,6 +40,8 @@ class RatingCrud
     {
         $sql = "SELECT product_id, AVG(star_count) as rating FROM ratings GROUP BY product_id";
         $params = [];
+        // averge op de database gebruiken?
+        //de database kan lang doen over SUM en AVG, dus eerst data ophalen en dan berekeningen doen?
 
         return $this->crud->readMultipleRows($sql, $params);
     }

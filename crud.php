@@ -13,7 +13,7 @@ class Crud
         $password = 'ditiseenwachtwoord';
         $dbname = 'lauras_webshop';
 
-        $this->pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $this->pdo = new PDO("mysql:port=3306;host=$servername;dbname=$dbname", $username, $password);
     }
 
     //generieke database functies
