@@ -6,10 +6,15 @@ class DatabaseConnection
     private static function connectToDatabase()
     {
         // Create connection
-        $server = 'localhost';
-        $username = 'laura_web_shop_user';
-        $password = 'ditiseenwachtwoord';
-        $dbname = 'lauras_webshop';
+        // $server = 'localhost';
+        // $username = 'laura_web_shop_user';
+        // $password = 'ditiseenwachtwoord';
+        // $dbname = 'lauras_webshop';
+
+        $server = getenv('MYSQL_SERVER');
+        $username = getenv('MYSQL_USER');
+        $password = getenv('MYSQL_PASSWORD');
+        $dbname = getenv('MYSQL_DATABASE');
 
         $conn = mysqli_connect($server, $username, $password, $dbname);
 

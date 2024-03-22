@@ -8,12 +8,12 @@ class Crud
 
     public function __construct()
     {
-        $servername = 'localhost';
-        $username = 'laura_web_shop_user';
-        $password = 'ditiseenwachtwoord';
-        $dbname = 'lauras_webshop';
+        $server = getenv('MYSQL_SERVER');
+        $username = getenv('MYSQL_LAURA_WEBSHOP_USER');
+        $password = getenv('MYSQL_LAURA_WEBSHOP_PASSWORD');
+        $dbname = getenv('MYSQL_LAURA_WEBSHOP_DATABASE');
 
-        $this->pdo = new PDO("mysql:port=3306;host=$servername;dbname=$dbname", $username, $password);
+        $this->pdo = new PDO("mysql:port=3306;host=$server;dbname=$dbname", $username, $password);
     }
 
     //generieke database functies
