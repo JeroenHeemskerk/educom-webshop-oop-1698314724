@@ -16,12 +16,12 @@ jobs:
   build-and-push-image:
     name: Build and push Docker image to Docker Hub
     runs-on: ubuntu-latest
-    permissions: write-all
-      # contents: read
-      # packages: write
-      # # This is used to complete the identity challenge
-      # # with sigstore/fulcio when running outside of PRs.
-      # id-token: write
+    permissions: 
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
       
     steps:
       - name: Checkout repository
@@ -40,7 +40,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.HUB_ACCESS_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
 
       # Extract metadata (tags, labels) for Docker
